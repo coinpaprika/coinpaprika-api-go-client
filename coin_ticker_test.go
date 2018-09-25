@@ -43,7 +43,7 @@ func (suite *CoinTickerTestSuite) TestConvert() {
 		suite.NotNil(ticker.Volume24hUSD)
 		suite.Equal(int64(2000), *ticker.Volume24hUSD)
 
-		suite.Equal(time.Date(2018, 4, 30, 13, 47, 19, 0, time.Local), ticker.LastUpdated)
+		suite.Equal(time.Date(2018, 4, 30, 11, 47, 19, 0, time.UTC), ticker.LastUpdated.UTC())
 	}
 
 }
