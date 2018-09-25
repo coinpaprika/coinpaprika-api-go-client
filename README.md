@@ -1,5 +1,7 @@
 # Coinpaprika API Go Client
 
+[![Build Status](https://travis-ci.org/coinpaprika/coinpaprika-api-go-client.svg?branch=master)](https://travis-ci.org/coinpaprika/coinpaprika-api-go-client)
+
 ## Usage
 
 This library provides convenient way to use [coinpaprika.com API](https://api.coinpaprika.com/) in Go.
