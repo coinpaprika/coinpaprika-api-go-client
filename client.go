@@ -7,7 +7,11 @@ import (
 	"net/http"
 )
 
-const baseURL = "https://api.coinpaprika.com/v1"
+const (
+	version      = "v1.0.0"
+	userAgentFMT = "Coinpaprika API Client - Go (%s)"
+	baseURL      = "https://api.coinpaprika.com/v1"
+)
 
 // OptionFunc is a function that is used to configure a Client.
 type OptionFunc func(*Client) error
@@ -143,6 +147,7 @@ func sendGET(client *http.Client, url string) ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
+	req.Header.Set("User-Agent", fmt.Sprintf(userAgentFMT, version))
 
 	response, err := client.Do(req)
 	if err != nil {
