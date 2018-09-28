@@ -89,6 +89,39 @@ func (suite *ClientTestSuite) TestGetCoins() {
 	suite.NotEmpty(coins)
 }
 
+func (suite *ClientTestSuite) TestSearch() {
+	searchResult, err := suite.paprikaClient.Search("a", nil)
+	suite.NoError(err)
+
+	suite.NotNil(searchResult.Currencies)
+	suite.NotNil(searchResult.Exchanges)
+	suite.NotNil(searchResult.ICOS)
+	suite.NotNil(searchResult.People)
+	suite.NotNil(searchResult.Tags)
+}
+
+func (suite *ClientTestSuite) TestSearchLimit() {
+	searchResult, err := suite.paprikaClient.Search("a", &SearchOptions{Limit: 1})
+	suite.NoError(err)
+
+	suite.Len(searchResult.Currencies, 1)
+	suite.Len(searchResult.Exchanges, 1)
+	suite.Len(searchResult.ICOS, 1)
+	suite.Len(searchResult.People, 1)
+	suite.Len(searchResult.Tags, 1)
+}
+
+func (suite *ClientTestSuite) TestSearchCategories() {
+	searchResult, err := suite.paprikaClient.Search("a", &SearchOptions{Categories: "currencies,exchanges"})
+	suite.NoError(err)
+
+	suite.NotNil(searchResult.Currencies)
+	suite.NotNil(searchResult.Exchanges)
+	suite.Nil(searchResult.ICOS)
+	suite.Nil(searchResult.People)
+	suite.Nil(searchResult.Tags)
+}
+
 func TestClientTestSuite(t *testing.T) {
 	suite.Run(t, new(ClientTestSuite))
 }

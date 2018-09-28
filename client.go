@@ -141,6 +141,50 @@ func (c *Client) GetCoins() (coins []*CoinInfo, err error) {
 	return coins, err
 }
 
+func constructSearchURL(query string, options *SearchOptions) string {
+	url := fmt.Sprintf("%s/search?q=%s", baseURL, query)
+
+	if options == nil {
+		return url
+	}
+
+	if options.Categories != "" {
+		url = fmt.Sprintf("%s&c=%s", url, options.Categories)
+	}
+	if options.Limit != 0 {
+		url = fmt.Sprintf("%s&limit=%v", url, options.Limit)
+	}
+
+	return url
+}
+
+// SearchOptions specifies optional parameters for search endpoint.
+type SearchOptions struct {
+	// Comma separated categories to include in search results.
+	// Available options: currencies|exchanges|icos|people|tags.
+	// Eg. "currencies,exchanges"
+	Categories string
+
+	// The number of results per category.
+	Limit int
+}
+
+// Search returns a list of currencies, exchanges, icos, people and tags for given query.
+func (c *Client) Search(query string, options *SearchOptions) (searchResult *SearchResult, err error) {
+	url := constructSearchURL(query, options)
+
+	body, err := sendGET(c.httpClient, url)
+	if err != nil {
+		return nil, err
+	}
+
+	if err := json.Unmarshal(body, &searchResult); err != nil {
+		return searchResult, err
+	}
+
+	return searchResult, nil
+}
+
 func sendGET(client *http.Client, url string) ([]byte, error) {
 	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
