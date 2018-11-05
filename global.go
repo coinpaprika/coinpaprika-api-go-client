@@ -5,8 +5,10 @@ import (
 	"fmt"
 )
 
+// GlobalService is used to get global market overview data
 type GlobalService service
 
+// GlobalStats stores global market overview data
 type GlobalStats struct {
 	MarketCapUSD               int64   `json:"market_cap_usd"`
 	Volume24hUSD               int64   `json:"volume_24h_usd"`

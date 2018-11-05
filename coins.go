@@ -5,6 +5,7 @@ import (
 	"fmt"
 )
 
+// CoinsService is used to get coins information
 type CoinsService service
 
 // CoinInfo stores basic currency information

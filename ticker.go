@@ -9,6 +9,7 @@ import (
 	"github.com/pkg/errors"
 )
 
+// TickerService is used to get ticker information
 type TickerService service
 
 const conversionErrFMT = "conversion error in coin: %s, field: %s"

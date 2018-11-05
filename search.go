@@ -5,6 +5,7 @@ import (
 	"fmt"
 )
 
+// SearchService is used for search requests
 type SearchService service
 
 // Person represents a person.
