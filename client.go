@@ -21,6 +21,7 @@ type Client struct {
 	SearchService
 	CoinsService
 	GlobalService
+	TagsService
 }
 
 type service struct {
@@ -43,6 +44,7 @@ func NewClient(options ...OptionFunc) (*Client, error) {
 	c.SearchService.httpClient = c.httpClient
 	c.CoinsService.httpClient = c.httpClient
 	c.GlobalService.httpClient = c.httpClient
+	c.TagsService.httpClient = c.httpClient
 
 	return c, nil
 }
