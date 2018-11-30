@@ -76,8 +76,8 @@ Check out the [`./examples`](./examples) directory.
 - [ ] Get people by ID
 
 ### Tags
-- [ ] List tags
-- [ ] Get tag by ID
+- [x] List tags
+- [x] Get tag by ID
 
 ### Tickers (new)
 - [ ] Get tickers for all coins
