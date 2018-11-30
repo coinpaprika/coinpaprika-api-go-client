@@ -59,7 +59,7 @@ Check out the [`./examples`](./examples) directory.
 
 ## API Status (version 1.3)
 
-###Global
+### Global
 - [x] Get market overview data
 
 ### Coins
