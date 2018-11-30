@@ -45,9 +45,9 @@ func constructTagsURL(tagID *string, options *TagsOptions) string {
 
 // GetTags returns a list of all tags.
 func (s *TagsService) GetTags(options *TagsOptions) (tags []*TagExtended, err error) {
-	url := constructTagsURL(nil, options)
+	uri := constructTagsURL(nil, options)
 
-	body, err := sendGET(s.httpClient, url)
+	body, err := sendGET(s.httpClient, uri)
 	if err != nil {
 		return nil, err
 	}
@@ -60,9 +60,9 @@ func (s *TagsService) GetTags(options *TagsOptions) (tags []*TagExtended, err er
 }
 
 func (s *TagsService) GetTagByID(tagID string, options *TagsOptions) (tag *TagExtended, err error) {
-	url := constructTagsURL(&tagID, options)
+	uri := constructTagsURL(&tagID, options)
 
-	body, err := sendGET(s.httpClient, url)
+	body, err := sendGET(s.httpClient, uri)
 	if err != nil {
 		return nil, err
 	}
