@@ -3,6 +3,7 @@ package coinpaprika
 import (
 	"encoding/json"
 	"fmt"
+	"net/url"
 )
 
 // TagsService is used for listing and getting tags.
@@ -24,20 +25,22 @@ type TagExtended struct {
 }
 
 func constructTagsURL(tagID *string, options *TagsOptions) string {
-	url := fmt.Sprintf("%s/tags", baseURL)
+	uri := fmt.Sprintf("%s/tags", baseURL)
 	if tagID != nil {
-		url = fmt.Sprintf("%s/%s", url, *tagID)
+		uri = fmt.Sprintf("%s/%s", uri, *tagID)
 	}
 
 	if options == nil {
-		return url
+		return uri
 	}
 
 	if options.AdditionalFields != "" {
-		url = fmt.Sprintf("%s?additional_fields=%s", url, options.AdditionalFields)
+		v := url.Values{}
+		v.Set("additional_fields", options.AdditionalFields)
+		uri = fmt.Sprintf("%s?%s", uri, v.Encode())
 	}
 
-	return url
+	return uri
 }
 
 // GetTags returns a list of all tags.
