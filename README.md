@@ -79,9 +79,9 @@ Check out the [`./examples`](./examples) directory.
 - [ ] List tags
 - [ ] Get tag by ID
 
-### Ticker (deprecated)
-- [x] Get tickers for all coins
-- [x] Get ticker information for specific coin
+### Tickers (new)
+- [ ] Get tickers for all coins
+- [ ] Get ticker information for specific coin
 - [ ] Get historical tickers for specific coin
 
 ### Exchanges
@@ -91,6 +91,10 @@ Check out the [`./examples`](./examples) directory.
 
 ### Search
 - [x] Search tool
+
+### Ticker (deprecated)
+- [x] Get tickers for all coins
+- [x] Get ticker information for specific coin
 
 ## License
 
