@@ -57,6 +57,41 @@ if err != nil {
 Check out the [`./examples`](./examples) directory.
 
 
+## API Status (version 1.3)
+
+###Global
+- [x] Get market overview data
+
+### Coins
+- [x] List coins
+- [ ] Get coin by ID
+- [ ] Get twitter timeline for coin
+- [ ] Get coin events by coin ID
+- [ ] Get exchanges by coin ID
+- [ ] Get markets by coin ID
+- [ ] Get latest OHLC
+- [ ] Get historical OHLC
+
+### People
+- [ ] Get people by ID
+
+### Tags
+- [ ] List tags
+- [ ] Get tag by ID
+
+### Ticker (deprecated)
+- [x] Get tickers for all coins
+- [x] Get ticker information for specific coin
+- [ ] Get historical tickers for specific coin
+
+### Exchanges
+- [ ] List exchanges
+- [ ] Get exchange by ID
+- [ ] List markets by exchange ID
+
+### Search
+- [x] Search tool
+
 ## License
 
 CoinpaprikaAPI is available under the MIT license. See the [LICENSE file](./LICENSE.md) for more info.
