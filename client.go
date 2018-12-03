@@ -11,9 +11,6 @@ const (
 	baseURL   = "https://api.coinpaprika.com/v1"
 )
 
-// OptionFunc is a function that is used to configure a Client.
-type OptionFunc func(*Client) error
-
 // Client can be used to get data from coinpaprika API.
 type Client struct {
 	httpClient *http.Client
@@ -29,15 +26,13 @@ type service struct {
 }
 
 // NewClient creates a new client to work with coinpaprika API.
-func NewClient(options ...OptionFunc) (*Client, error) {
-	c := &Client{
-		httpClient: http.DefaultClient,
+func NewClient(httpClient *http.Client) *Client {
+	if httpClient == nil {
+		httpClient = http.DefaultClient
 	}
 
-	for _, o := range options {
-		if err := o(c); err != nil {
-			return nil, err
-		}
+	c := &Client{
+		httpClient: httpClient,
 	}
 
 	c.Tickers.httpClient = c.httpClient
@@ -46,19 +41,7 @@ func NewClient(options ...OptionFunc) (*Client, error) {
 	c.Global.httpClient = c.httpClient
 	c.Tags.httpClient = c.httpClient
 
-	return c, nil
-}
-
-// SetHTTPClient can be used to specify the http.Client to use when making HTTP requests.
-func SetHTTPClient(httpClient *http.Client) OptionFunc {
-	return func(c *Client) error {
-		if httpClient != nil {
-			c.httpClient = httpClient
-		} else {
-			c.httpClient = http.DefaultClient
-		}
-		return nil
-	}
+	return c
 }
 
 func sendGET(client *http.Client, url string) ([]byte, error) {

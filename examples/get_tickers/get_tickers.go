@@ -7,10 +7,7 @@ import (
 )
 
 func main() {
-	paprikaClient, err := coinpaprika.NewClient()
-	if err != nil {
-		panic(err)
-	}
+	paprikaClient := coinpaprika.NewClient(nil)
 
 	tickers, err := paprikaClient.Tickers.List()
 	if err != nil {

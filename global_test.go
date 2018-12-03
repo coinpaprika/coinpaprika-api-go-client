@@ -12,8 +12,8 @@ type GlobalTestSuite struct {
 }
 
 func (suite *GlobalTestSuite) SetupTest() {
-	paprikaClient, err := NewClient()
-	suite.NoError(err)
+	paprikaClient := NewClient(nil)
+
 	suite.NotNil(paprikaClient)
 
 	suite.paprikaClient = paprikaClient

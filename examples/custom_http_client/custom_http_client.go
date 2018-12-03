@@ -11,10 +11,7 @@ import (
 func main() {
 	customClient := &http.Client{Timeout: 10 * time.Second}
 
-	paprikaClient, err := coinpaprika.NewClient(coinpaprika.SetHTTPClient(customClient))
-	if err != nil {
-		panic(err)
-	}
+	paprikaClient := coinpaprika.NewClient(customClient)
 
 	coins, err := paprikaClient.Global.Get()
 	if err != nil {

@@ -12,8 +12,7 @@ type SearchTestSuite struct {
 }
 
 func (suite *SearchTestSuite) SetupTest() {
-	paprikaClient, err := NewClient()
-	suite.NoError(err)
+	paprikaClient := NewClient(nil)
 	suite.NotNil(paprikaClient)
 
 	suite.paprikaClient = paprikaClient

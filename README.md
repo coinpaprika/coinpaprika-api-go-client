@@ -21,17 +21,14 @@ go get -u github.com/coinpaprika/coinpaprika-api-go-client
 
 ```go
 func main() {
-	paprikaClient, err := coinpaprika.NewClient()
-	if err != nil {
-		panic(err)
-	}
+	paprikaClient := coinpaprika.NewClient(nil)
 
-	coinTickers, err := paprikaClient.GetTickers()
-	if err != nil {
-		panic(err)
-	}
+	tickers, err := paprikaClient.Tickers.List()
+    	if err != nil {
+    		panic(err)
+    	}
 
-	for _, c := range coinTickers {
+	for idx, t := range tickers {
 		fmt.Println("Name", c.Name)
 		fmt.Println("Symbol", c.Symbol)
 		fmt.Println("Rank", c.Rank)
@@ -44,11 +41,7 @@ func main() {
 
 ```go
 customClient := &http.Client{Timeout: 10 * time.Second}
-
-paprikaClient, err := coinpaprika.NewClient(coinpaprika.SetHTTPClient(customClient))
-if err != nil {
-    panic(err)
-}
+paprikaClient := coinpaprika.NewClient(customClient)
 ```
 
 
@@ -57,7 +50,7 @@ if err != nil {
 Check out the [`./examples`](./examples) directory.
 
 
-## API Status (version 1.3)
+## Implementation status (API v1.3.0)
 
 ### Global
 - [x] Get market overview data

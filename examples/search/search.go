@@ -7,10 +7,7 @@ import (
 )
 
 func main() {
-	paprikaClient, err := coinpaprika.NewClient()
-	if err != nil {
-		panic(err)
-	}
+	paprikaClient := coinpaprika.NewClient(nil)
 
 	// Search currencies and exchanges with "bitcoin" in name.
 	searchOpts := &coinpaprika.SearchOptions{Categories: "currencies,exchanges"}

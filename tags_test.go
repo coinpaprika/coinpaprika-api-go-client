@@ -12,8 +12,7 @@ type TagsTestSuite struct {
 }
 
 func (suite *TagsTestSuite) SetupTest() {
-	paprikaClient, err := NewClient()
-	suite.NoError(err)
+	paprikaClient := NewClient(nil)
 	suite.NotNil(paprikaClient)
 
 	suite.paprikaClient = paprikaClient
