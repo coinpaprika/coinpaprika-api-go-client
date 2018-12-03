@@ -18,11 +18,11 @@ func main() {
 
 	fmt.Println("Currencies:")
 	for _, c := range searchResult.Currencies {
-		fmt.Printf("Rank: %-4d Name: %-20s Symbol: %-4s\n", c.Rank, c.Name, c.Symbol)
+		fmt.Printf("Rank: %-4d Name: %-20s Symbol: %-4s\n", *c.Rank, *c.Name, *c.Symbol)
 	}
 
 	fmt.Println("\nExchanges:")
 	for _, c := range searchResult.Exchanges {
-		fmt.Printf("Rank: %-4d Name: %-20s\n", c.Rank, c.Name)
+		fmt.Printf("Rank: %-4d Name: %-20s\n", *c.Rank, *c.Name)
 	}
 }

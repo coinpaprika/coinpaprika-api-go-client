@@ -29,11 +29,10 @@ func (suite *TickerTestSuite) TestGetByID() {
 	suite.NoError(err)
 	suite.NotEmpty(ticker)
 
-	suite.Equal("Bitcoin", ticker.Name)
-	suite.Equal("BTC", ticker.Symbol)
-	suite.Equal("btc-bitcoin", ticker.ID)
+	suite.Equal("Bitcoin", *ticker.Name)
+	suite.Equal("BTC", *ticker.Symbol)
+	suite.Equal("btc-bitcoin", *ticker.ID)
 
-	suite.NotNil(ticker.Quotes["USD"].Price)
 	suite.NotZero(ticker.Quotes["USD"].Price)
 }
 

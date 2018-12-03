@@ -8,53 +8,13 @@ import (
 // SearchService is used for search requests
 type SearchService service
 
-// SearchCurrency stores basic currency information
-type SearchCurrency struct {
-	ID       string `json:"id"`
-	Name     string `json:"name"`
-	Symbol   string `json:"symbol"`
-	Rank     int64  `json:"rank"`
-	IsNew    bool   `json:"is_new"`
-	IsActive bool   `json:"is_active"`
-}
-
-// SearchPerson represents a person in search result.
-type SearchPerson struct {
-	ID         string `json:"id"`
-	Name       string `json:"name"`
-	TeamsCount int    `json:"teams_count"`
-}
-
-// SearchTag represents a tag in search result.
-type SearchTag struct {
-	ID          string `json:"id"`
-	Name        string `json:"name"`
-	CoinCounter int    `json:"coin_counter"`
-	ICOCounter  int    `json:"ico_counter"`
-}
-
-// SearchExchange represents an exchange in search result.
-type SearchExchange struct {
-	ID   string `json:"id"`
-	Name string `json:"name"`
-	Rank int    `json:"rank"`
-}
-
-// SearchICO represents an ICO in search result.
-type SearchICO struct {
-	ID     string `json:"id"`
-	Name   string `json:"name"`
-	Symbol string `json:"symbol"`
-	IsNew  bool   `json:"is_new"`
-}
-
 // SearchResult represents a result of search API endpoint.
 type SearchResult struct {
-	Currencies []*SearchCurrency `json:"currencies"`
-	ICOS       []*SearchICO      `json:"icos"`
-	Exchanges  []*SearchExchange `json:"exchanges"`
-	People     []*SearchPerson   `json:"people"`
-	Tags       []*SearchTag      `json:"tags"`
+	Currencies []*Coin     `json:"currencies"`
+	ICOS       []*ICO      `json:"icos"`
+	Exchanges  []*Exchange `json:"exchanges"`
+	People     []*Person   `json:"people"`
+	Tags       []*Tag      `json:"tags"`
 }
 
 func constructSearchURL(query string, options *SearchOptions) string {

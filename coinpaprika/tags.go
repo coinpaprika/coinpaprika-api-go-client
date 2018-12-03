@@ -15,12 +15,12 @@ type TagsOptions struct {
 }
 
 type Tag struct {
-	ID          string   `json:"id"`
-	Name        string   `json:"name"`
-	Description string   `json:"description"`
-	Type        string   `json:"type"`
-	CoinCounter int      `json:"coin_counter"`
-	ICOCounter  int      `json:"ico_counter"`
+	ID          *string  `json:"id"`
+	Name        *string  `json:"name"`
+	Description *string  `json:"description"`
+	Type        *string  `json:"type"`
+	CoinCounter *int64   `json:"coin_counter"`
+	ICOCounter  *int64   `json:"ico_counter"`
 	Coins       []string `json:"coins"`
 }
 

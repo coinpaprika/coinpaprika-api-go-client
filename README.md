@@ -31,9 +31,9 @@ func main() {
 	}
 
 	for _, t := range tickers {
-		fmt.Println("Name:", t.Name)
-		fmt.Println("Symbol:", t.Symbol)
-		fmt.Println("Rank:", t.Rank)
+		fmt.Println("Name:", *t.Name)
+		fmt.Println("Symbol:", *t.Symbol)
+		fmt.Println("Rank:", *t.Rank)
 		fmt.Println("----")
 	}
 }
@@ -41,7 +41,7 @@ func main() {
 
 ## Setting custom HTTP client
 
-```go
+```
 customClient := &http.Client{Timeout: 10 * time.Second}
 paprikaClient := coinpaprika.NewClient(customClient)
 ```

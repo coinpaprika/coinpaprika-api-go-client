@@ -23,7 +23,7 @@ func (suite *TagsTestSuite) TestList() {
 	suite.NoError(err)
 	suite.NotEmpty(tags)
 
-	suite.Nil(tags[0].Coins)
+	suite.Empty(tags[0].Coins)
 }
 
 func (suite *TagsTestSuite) TestListWithCoins() {
@@ -31,21 +31,21 @@ func (suite *TagsTestSuite) TestListWithCoins() {
 	suite.NoError(err)
 	suite.NotEmpty(tags)
 
-	suite.NotNil(tags[0].Coins)
+	suite.NotEmpty(tags[0].Coins)
 }
 
 func (suite *TagsTestSuite) TestGet() {
 	tag, err := suite.paprikaClient.Tags.GetByID("cryptocurrency", nil)
 	suite.NoError(err)
 	suite.NotNil(tag)
-	suite.Nil(tag.Coins)
+	suite.Empty(tag.Coins)
 }
 
 func (suite *TagsTestSuite) TestGetWithCoins() {
 	tag, err := suite.paprikaClient.Tags.GetByID("cryptocurrency", &TagsOptions{AdditionalFields: "coins"})
 	suite.NoError(err)
 	suite.NotNil(tag)
-	suite.NotNil(tag.Coins)
+	suite.NotEmpty(tag.Coins)
 }
 
 func TestTagsTestSuite(t *testing.T) {
