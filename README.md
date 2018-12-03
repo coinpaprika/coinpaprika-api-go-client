@@ -1,7 +1,7 @@
 # Coinpaprika API Go Client
 
 [![Build Status](https://travis-ci.org/coinpaprika/coinpaprika-api-go-client.svg?branch=master)](https://travis-ci.org/coinpaprika/coinpaprika-api-go-client)
-[![go-doc](https://godoc.org/github.com/coinpaprika/coinpaprika-api-go-client?status.svg)](https://godoc.org/github.com/coinpaprika/coinpaprika-api-go-client)
+[![go-doc](https://godoc.org/github.com/coinpaprika/coinpaprika-api-go-client?status.svg)](https://godoc.org/github.com/coinpaprika/coinpaprika-api-go-client/coinpaprika)
 [![Go Report Card](https://goreportcard.com/badge/github.com/coinpaprika/coinpaprika-api-go-client)](https://goreportcard.com/report/github.com/coinpaprika/coinpaprika-api-go-client)
 
 
