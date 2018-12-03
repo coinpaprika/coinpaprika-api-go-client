@@ -17,7 +17,7 @@ type GlobalStats struct {
 	LastUpdated                int64   `json:"last_updated"`
 }
 
-// GetGlobalStats gets market overview data.
+// Get gets market overview data.
 func (s *GlobalService) Get() (*GlobalStats, error) {
 	url := fmt.Sprintf("%s/global", baseURL)
 

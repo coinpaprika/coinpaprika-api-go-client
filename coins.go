@@ -18,7 +18,7 @@ type Coin struct {
 	IsActive bool   `json:"is_active"`
 }
 
-// ListCoins returns list of all active coins listed on coinpaprika.
+// List returns list of all active coins listed on coinpaprika.
 func (s *CoinsService) List() (coins []*Coin, err error) {
 	url := fmt.Sprintf("%s/coins", baseURL)
 

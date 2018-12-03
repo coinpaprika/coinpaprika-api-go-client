@@ -12,16 +12,16 @@ func main() {
 		panic(err)
 	}
 
-	coinTickers, err := paprikaClient.Tickers.GetTickersUnconverted()
+	tickers, err := paprikaClient.Tickers.ListUnconverted()
 	if err != nil {
 		panic(err)
 	}
 
-	for idx, c := range coinTickers {
-		fmt.Println("Name", c.Name)
-		fmt.Println("Symbol", c.Symbol)
-		fmt.Println("Rank", c.Rank)
-		fmt.Println("PriceUSD", c.PriceUSD)
+	for idx, t := range tickers {
+		fmt.Println("Name", t.Name)
+		fmt.Println("Symbol", t.Symbol)
+		fmt.Println("Rank", t.Rank)
+		fmt.Println("PriceUSD", t.PriceUSD)
 		fmt.Println()
 
 		if idx >= 2 {

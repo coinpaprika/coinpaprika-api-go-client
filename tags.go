@@ -43,7 +43,7 @@ func constructTagsURL(tagID *string, options *TagsOptions) string {
 	return uri
 }
 
-// ListTags returns a list of all tags.
+// List returns a list of all tags.
 func (s *TagsService) List(options *TagsOptions) (tags []*Tag, err error) {
 	uri := constructTagsURL(nil, options)
 
@@ -59,6 +59,7 @@ func (s *TagsService) List(options *TagsOptions) (tags []*Tag, err error) {
 	return tags, nil
 }
 
+// GetByID return a tag by id.
 func (s *TagsService) GetByID(tagID string, options *TagsOptions) (tag *Tag, err error) {
 	uri := constructTagsURL(&tagID, options)
 

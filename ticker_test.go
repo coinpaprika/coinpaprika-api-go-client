@@ -21,7 +21,7 @@ func (suite *TickerTestSuite) SetupTest() {
 }
 
 func (suite *TickerTestSuite) TestConvert() {
-	unconverted := CoinTickerUnconverted{
+	unconverted := TickerUnconverted{
 		Name:         "TestCoin",
 		Symbol:       "TC",
 		Rank:         "100",
@@ -58,19 +58,19 @@ func (suite *TickerTestSuite) TestConvert() {
 }
 
 func (suite *TickerTestSuite) TestGetTickers() {
-	tickers, err := suite.paprikaClient.Tickers.GetTickers()
+	tickers, err := suite.paprikaClient.Tickers.List()
 	suite.NoError(err)
 	suite.NotEmpty(tickers)
 }
 
 func (suite *TickerTestSuite) TestGetTickersUnconverted() {
-	tickers, err := suite.paprikaClient.Tickers.GetTickersUnconverted()
+	tickers, err := suite.paprikaClient.Tickers.ListUnconverted()
 	suite.NoError(err)
 	suite.NotEmpty(tickers)
 }
 
 func (suite *TickerTestSuite) TestGetTickerByIDUnconverted() {
-	ticker, err := suite.paprikaClient.Tickers.GetTickerByIDUnconverted("btc-bitcoin")
+	ticker, err := suite.paprikaClient.Tickers.GetByIDUnconverted("btc-bitcoin")
 	suite.NoError(err)
 	suite.NotEmpty(ticker)
 
@@ -80,7 +80,7 @@ func (suite *TickerTestSuite) TestGetTickerByIDUnconverted() {
 }
 
 func (suite *TickerTestSuite) TestGetTickerByID() {
-	ticker, err := suite.paprikaClient.Tickers.GetTickerByID("btc-bitcoin")
+	ticker, err := suite.paprikaClient.Tickers.GetByID("btc-bitcoin")
 	suite.NoError(err)
 	suite.NotEmpty(ticker)
 

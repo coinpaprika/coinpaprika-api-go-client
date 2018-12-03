@@ -19,7 +19,7 @@ func (suite *GlobalTestSuite) SetupTest() {
 	suite.paprikaClient = paprikaClient
 }
 
-func (suite *GlobalTestSuite) TestGetGlobalStats() {
+func (suite *GlobalTestSuite) TestGet() {
 	globalStats, err := suite.paprikaClient.Global.Get()
 	suite.NoError(err)
 

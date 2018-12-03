@@ -14,8 +14,8 @@ type TickerService service
 
 const conversionErrFMT = "conversion error in coin: %s, field: %s"
 
-// CoinTickerUnconverted represents ticker information in original format returned by coinpaprika API.
-type CoinTickerUnconverted struct {
+// TickerUnconverted represents ticker information in original format returned by coinpaprika API.
+type TickerUnconverted struct {
 	ID                string `json:"id"`
 	Name              string `json:"name"`
 	Symbol            string `json:"symbol"`
@@ -55,7 +55,7 @@ func convertStrToIntPtr(value string) (converted *int64, err error) {
 	return converted, nil
 }
 
-func (u *CoinTickerUnconverted) convert() (*CoinTicker, error) {
+func (u *TickerUnconverted) convert() (*Ticker, error) {
 	rank, err := strconv.ParseInt(u.Rank, 10, 64)
 	if err != nil {
 		return nil, errors.Wrap(err, fmt.Sprintf(conversionErrFMT, u.Name, "rank"))
@@ -116,7 +116,7 @@ func (u *CoinTickerUnconverted) convert() (*CoinTicker, error) {
 		return nil, errors.Wrap(err, fmt.Sprintf(conversionErrFMT, u.Name, "last_updated"))
 	}
 
-	ct := CoinTicker{
+	ct := Ticker{
 		ID:                u.ID,
 		Name:              u.Name,
 		Symbol:            u.Symbol,
@@ -137,8 +137,8 @@ func (u *CoinTickerUnconverted) convert() (*CoinTicker, error) {
 	return &ct, nil
 }
 
-// CoinTicker represents ticker information parsed to appropriate types.
-type CoinTicker struct {
+// Tickers represents ticker information parsed to appropriate types.
+type Ticker struct {
 	ID                string    `json:"id"`
 	Name              string    `json:"name"`
 	Symbol            string    `json:"symbol"`
@@ -156,8 +156,8 @@ type CoinTicker struct {
 	LastUpdated       time.Time `json:"last_updated"`
 }
 
-// GetTickersUnconverted gets ticker information for all coins listed on coinpaprika. Returned data is in original string format.
-func (s *TickerService) GetTickersUnconverted() (tickersUnconverted []*CoinTickerUnconverted, err error) {
+// ListUnconverted gets ticker information for all coins listed on coinpaprika. Returned data is in original string format.
+func (s *TickerService) ListUnconverted() (tickersUnconverted []*TickerUnconverted, err error) {
 	url := fmt.Sprintf("%s/ticker", baseURL)
 
 	body, err := sendGET(s.httpClient, url)
@@ -172,9 +172,9 @@ func (s *TickerService) GetTickersUnconverted() (tickersUnconverted []*CoinTicke
 	return tickersUnconverted, err
 }
 
-// GetTickers gets ticker information for all coins listed on coinpaprika. Returned data is automatically parsed.
-func (s *TickerService) GetTickers() (coinTickers []*CoinTicker, err error) {
-	tickersUnconverted, err := s.GetTickersUnconverted()
+// List gets ticker information for all coins listed on coinpaprika. Returned data is automatically parsed.
+func (s *TickerService) List() (coinTickers []*Ticker, err error) {
+	tickersUnconverted, err := s.ListUnconverted()
 	if err != nil {
 		return nil, err
 	}
@@ -190,8 +190,8 @@ func (s *TickerService) GetTickers() (coinTickers []*CoinTicker, err error) {
 	return coinTickers, nil
 }
 
-// GetTickerByIDUnconverted gets ticker information for specific coin by id (eg. btc-bitcoin). Returned data is in original string format.
-func (s *TickerService) GetTickerByIDUnconverted(id string) (tickerUnconverted *CoinTickerUnconverted, err error) {
+// GetByIDUnconverted gets ticker information for specific coin by id (eg. btc-bitcoin). Returned data is in original string format.
+func (s *TickerService) GetByIDUnconverted(id string) (tickerUnconverted *TickerUnconverted, err error) {
 	url := fmt.Sprintf("%s/ticker/%s", baseURL, id)
 
 	body, err := sendGET(s.httpClient, url)
@@ -206,9 +206,9 @@ func (s *TickerService) GetTickerByIDUnconverted(id string) (tickerUnconverted *
 	return tickerUnconverted, err
 }
 
-// GetTickerByID gets ticker information for specific coin by id (eg. btc-bitcoin). Returned data is automatically parsed.
-func (s *TickerService) GetTickerByID(id string) (coinTickers *CoinTicker, err error) {
-	tickerUnconverted, err := s.GetTickerByIDUnconverted(id)
+// GetByID gets ticker information for specific coin by id (eg. btc-bitcoin). Returned data is automatically parsed.
+func (s *TickerService) GetByID(id string) (coinTickers *Ticker, err error) {
+	tickerUnconverted, err := s.GetByIDUnconverted(id)
 	if err != nil {
 		return nil, err
 	}
