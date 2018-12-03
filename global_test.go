@@ -12,15 +12,15 @@ type GlobalTestSuite struct {
 }
 
 func (suite *GlobalTestSuite) SetupTest() {
-	paprikaClient, err := NewClient()
-	suite.NoError(err)
+	paprikaClient := NewClient(nil)
+
 	suite.NotNil(paprikaClient)
 
 	suite.paprikaClient = paprikaClient
 }
 
-func (suite *GlobalTestSuite) TestGetGlobalStats() {
-	globalStats, err := suite.paprikaClient.GetGlobalStats()
+func (suite *GlobalTestSuite) TestGet() {
+	globalStats, err := suite.paprikaClient.Global.Get()
 	suite.NoError(err)
 
 	suite.NotZero(globalStats.MarketCapUSD)

@@ -12,15 +12,14 @@ type CoinsTestSuite struct {
 }
 
 func (suite *CoinsTestSuite) SetupTest() {
-	paprikaClient, err := NewClient()
-	suite.NoError(err)
+	paprikaClient := NewClient(nil)
 	suite.NotNil(paprikaClient)
 
 	suite.paprikaClient = paprikaClient
 }
 
-func (suite *ClientTestSuite) TestGetCoins() {
-	coins, err := suite.paprikaClient.GetCoins()
+func (suite *ClientTestSuite) TestListCoins() {
+	coins, err := suite.paprikaClient.Coins.List()
 	suite.NoError(err)
 	suite.NotEmpty(coins)
 }

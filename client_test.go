@@ -14,16 +14,14 @@ type ClientTestSuite struct {
 }
 
 func (suite *ClientTestSuite) SetupTest() {
-	paprikaClient, err := NewClient()
-	suite.NoError(err)
+	paprikaClient := NewClient(nil)
 	suite.NotNil(paprikaClient)
 
 	suite.paprikaClient = paprikaClient
 }
 
 func (suite *ClientTestSuite) TestNewClientDefault() {
-	client, err := NewClient()
-	suite.NoError(err)
+	client := NewClient(nil)
 	suite.NotNil(client)
 	suite.Equal(http.DefaultClient, client.httpClient)
 }
@@ -31,8 +29,7 @@ func (suite *ClientTestSuite) TestNewClientDefault() {
 func (suite *ClientTestSuite) TestNewClientSetHTTPClient() {
 	customHTTPClient := &http.Client{Timeout: time.Second * 10}
 
-	client, err := NewClient(SetHTTPClient(customHTTPClient))
-	suite.NoError(err)
+	client := NewClient(customHTTPClient)
 	suite.NotNil(client)
 	suite.Equal(customHTTPClient, client.httpClient)
 }

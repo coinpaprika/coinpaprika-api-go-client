@@ -7,22 +7,19 @@ import (
 )
 
 func main() {
-	paprikaClient, err := coinpaprika.NewClient()
+	paprikaClient := coinpaprika.NewClient(nil)
+
+	tickers, err := paprikaClient.Tickers.List()
 	if err != nil {
 		panic(err)
 	}
 
-	coinTickers, err := paprikaClient.GetTickers()
-	if err != nil {
-		panic(err)
-	}
-
-	for idx, c := range coinTickers {
-		fmt.Println("Name", c.Name)
-		fmt.Println("Symbol", c.Symbol)
-		fmt.Println("Rank", c.Rank)
-		if c.PriceUSD != nil {
-			fmt.Println("PriceUSD", *c.PriceUSD)
+	for idx, t := range tickers {
+		fmt.Println("Name:", t.Name)
+		fmt.Println("Symbol:", t.Symbol)
+		fmt.Println("Rank:", t.Rank)
+		if quoteUSD, ok := t.Quotes["USD"]; ok {
+			fmt.Println("Price USD:", quoteUSD.Price)
 		}
 		fmt.Println()
 		if idx >= 2 {

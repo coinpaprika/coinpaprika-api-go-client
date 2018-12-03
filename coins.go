@@ -8,8 +8,8 @@ import (
 // CoinsService is used to get coins information
 type CoinsService service
 
-// CoinInfo stores basic currency information
-type CoinInfo struct {
+// Coin stores basic currency information
+type Coin struct {
 	ID       string `json:"id"`
 	Name     string `json:"name"`
 	Symbol   string `json:"symbol"`
@@ -18,8 +18,8 @@ type CoinInfo struct {
 	IsActive bool   `json:"is_active"`
 }
 
-// GetCoins returns list of all active coins listed on coinpaprika.
-func (s *CoinsService) GetCoins() (coins []*CoinInfo, err error) {
+// List returns list of all active coins listed on coinpaprika.
+func (s *CoinsService) List() (coins []*Coin, err error) {
 	url := fmt.Sprintf("%s/coins", baseURL)
 
 	body, err := sendGET(s.httpClient, url)

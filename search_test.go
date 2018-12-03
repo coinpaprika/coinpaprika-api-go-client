@@ -12,15 +12,14 @@ type SearchTestSuite struct {
 }
 
 func (suite *SearchTestSuite) SetupTest() {
-	paprikaClient, err := NewClient()
-	suite.NoError(err)
+	paprikaClient := NewClient(nil)
 	suite.NotNil(paprikaClient)
 
 	suite.paprikaClient = paprikaClient
 }
 
 func (suite *SearchTestSuite) TestSearch() {
-	searchResult, err := suite.paprikaClient.Search("a", nil)
+	searchResult, err := suite.paprikaClient.Search.Search("a", nil)
 	suite.NoError(err)
 
 	suite.NotNil(searchResult.Currencies)
@@ -31,7 +30,7 @@ func (suite *SearchTestSuite) TestSearch() {
 }
 
 func (suite *SearchTestSuite) TestSearchLimit() {
-	searchResult, err := suite.paprikaClient.Search("a", &SearchOptions{Limit: 1})
+	searchResult, err := suite.paprikaClient.Search.Search("a", &SearchOptions{Limit: 1})
 	suite.NoError(err)
 
 	suite.Len(searchResult.Currencies, 1)
@@ -42,7 +41,7 @@ func (suite *SearchTestSuite) TestSearchLimit() {
 }
 
 func (suite *SearchTestSuite) TestSearchCategories() {
-	searchResult, err := suite.paprikaClient.Search("a", &SearchOptions{Categories: "currencies,exchanges"})
+	searchResult, err := suite.paprikaClient.Search.Search("a", &SearchOptions{Categories: "currencies,exchanges"})
 	suite.NoError(err)
 
 	suite.NotNil(searchResult.Currencies)
