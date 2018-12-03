@@ -11,30 +11,32 @@ This library provides convenient way to use [coinpaprika.com API](https://api.co
 
 [Coinpaprika](https://coinpaprika.com) delivers full market data to the world of crypto: coin prices, volumes, market caps, ATHs, return rates and more.
 
-## Install
-
-```bash
-go get -u github.com/coinpaprika/coinpaprika-api-go-client
-```
-
 ## Getting started
 
 ```go
+package main
+
+import (
+	"fmt"
+
+	"github.com/coinpaprika/coinpaprika-api-go-client/coinpaprika"
+)
+
 func main() {
 	paprikaClient := coinpaprika.NewClient(nil)
 
 	tickers, err := paprikaClient.Tickers.List()
-    	if err != nil {
-    		panic(err)
-    	}
+	if err != nil {
+		panic(err)
+	}
 
-	for idx, t := range tickers {
-		fmt.Println("Name", c.Name)
-		fmt.Println("Symbol", c.Symbol)
-		fmt.Println("Rank", c.Rank)
+	for _, t := range tickers {
+		fmt.Println("Name:", t.Name)
+		fmt.Println("Symbol:", t.Symbol)
+		fmt.Println("Rank:", t.Rank)
+		fmt.Println("----")
 	}
 }
-
 ```
 
 ## Setting custom HTTP client
