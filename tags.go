@@ -44,7 +44,7 @@ func constructTagsURL(tagID *string, options *TagsOptions) string {
 }
 
 // ListTags returns a list of all tags.
-func (s *TagsService) ListTags(options *TagsOptions) (tags []*Tag, err error) {
+func (s *TagsService) List(options *TagsOptions) (tags []*Tag, err error) {
 	uri := constructTagsURL(nil, options)
 
 	body, err := sendGET(s.httpClient, uri)
@@ -59,7 +59,7 @@ func (s *TagsService) ListTags(options *TagsOptions) (tags []*Tag, err error) {
 	return tags, nil
 }
 
-func (s *TagsService) GetTag(tagID string, options *TagsOptions) (tag *Tag, err error) {
+func (s *TagsService) GetByID(tagID string, options *TagsOptions) (tag *Tag, err error) {
 	uri := constructTagsURL(&tagID, options)
 
 	body, err := sendGET(s.httpClient, uri)

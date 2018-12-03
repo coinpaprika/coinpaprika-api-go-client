@@ -12,7 +12,7 @@ func main() {
 		panic(err)
 	}
 
-	coinTickers, err := paprikaClient.GetTickers()
+	coinTickers, err := paprikaClient.Tickers.GetTickers()
 	if err != nil {
 		panic(err)
 	}

@@ -18,7 +18,7 @@ type GlobalStats struct {
 }
 
 // GetGlobalStats gets market overview data.
-func (s *GlobalService) GetGlobalStats() (*GlobalStats, error) {
+func (s *GlobalService) Get() (*GlobalStats, error) {
 	url := fmt.Sprintf("%s/global", baseURL)
 
 	body, err := sendGET(s.httpClient, url)

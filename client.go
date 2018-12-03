@@ -17,11 +17,11 @@ type OptionFunc func(*Client) error
 // Client can be used to get data from coinpaprika API.
 type Client struct {
 	httpClient *http.Client
-	TickerService
-	SearchService
-	CoinsService
-	GlobalService
-	TagsService
+	Tickers    TickerService
+	Search     SearchService
+	Coins      CoinsService
+	Global     GlobalService
+	Tags       TagsService
 }
 
 type service struct {
@@ -40,11 +40,11 @@ func NewClient(options ...OptionFunc) (*Client, error) {
 		}
 	}
 
-	c.TickerService.httpClient = c.httpClient
-	c.SearchService.httpClient = c.httpClient
-	c.CoinsService.httpClient = c.httpClient
-	c.GlobalService.httpClient = c.httpClient
-	c.TagsService.httpClient = c.httpClient
+	c.Tickers.httpClient = c.httpClient
+	c.Search.httpClient = c.httpClient
+	c.Coins.httpClient = c.httpClient
+	c.Global.httpClient = c.httpClient
+	c.Tags.httpClient = c.httpClient
 
 	return c, nil
 }

@@ -20,7 +20,7 @@ func (suite *CoinsTestSuite) SetupTest() {
 }
 
 func (suite *ClientTestSuite) TestListCoins() {
-	coins, err := suite.paprikaClient.ListCoins()
+	coins, err := suite.paprikaClient.Coins.List()
 	suite.NoError(err)
 	suite.NotEmpty(coins)
 }

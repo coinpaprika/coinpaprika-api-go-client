@@ -20,7 +20,7 @@ func (suite *GlobalTestSuite) SetupTest() {
 }
 
 func (suite *GlobalTestSuite) TestGetGlobalStats() {
-	globalStats, err := suite.paprikaClient.GetGlobalStats()
+	globalStats, err := suite.paprikaClient.Global.Get()
 	suite.NoError(err)
 
 	suite.NotZero(globalStats.MarketCapUSD)

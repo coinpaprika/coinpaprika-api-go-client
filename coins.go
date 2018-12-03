@@ -19,7 +19,7 @@ type Coin struct {
 }
 
 // ListCoins returns list of all active coins listed on coinpaprika.
-func (s *CoinsService) ListCoins() (coins []*Coin, err error) {
+func (s *CoinsService) List() (coins []*Coin, err error) {
 	url := fmt.Sprintf("%s/coins", baseURL)
 
 	body, err := sendGET(s.httpClient, url)

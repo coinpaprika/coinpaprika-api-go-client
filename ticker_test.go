@@ -58,19 +58,19 @@ func (suite *TickerTestSuite) TestConvert() {
 }
 
 func (suite *TickerTestSuite) TestGetTickers() {
-	tickers, err := suite.paprikaClient.GetTickers()
+	tickers, err := suite.paprikaClient.Tickers.GetTickers()
 	suite.NoError(err)
 	suite.NotEmpty(tickers)
 }
 
 func (suite *TickerTestSuite) TestGetTickersUnconverted() {
-	tickers, err := suite.paprikaClient.GetTickersUnconverted()
+	tickers, err := suite.paprikaClient.Tickers.GetTickersUnconverted()
 	suite.NoError(err)
 	suite.NotEmpty(tickers)
 }
 
 func (suite *TickerTestSuite) TestGetTickerByIDUnconverted() {
-	ticker, err := suite.paprikaClient.GetTickerByIDUnconverted("btc-bitcoin")
+	ticker, err := suite.paprikaClient.Tickers.GetTickerByIDUnconverted("btc-bitcoin")
 	suite.NoError(err)
 	suite.NotEmpty(ticker)
 
@@ -80,7 +80,7 @@ func (suite *TickerTestSuite) TestGetTickerByIDUnconverted() {
 }
 
 func (suite *TickerTestSuite) TestGetTickerByID() {
-	ticker, err := suite.paprikaClient.GetTickerByID("btc-bitcoin")
+	ticker, err := suite.paprikaClient.Tickers.GetTickerByID("btc-bitcoin")
 	suite.NoError(err)
 	suite.NotEmpty(ticker)
 

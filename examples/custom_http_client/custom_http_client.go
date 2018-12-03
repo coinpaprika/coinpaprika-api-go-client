@@ -16,7 +16,7 @@ func main() {
 		panic(err)
 	}
 
-	coins, err := paprikaClient.GetGlobalStats()
+	coins, err := paprikaClient.Global.Get()
 	if err != nil {
 		panic(err)
 	}
