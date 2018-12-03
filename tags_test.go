@@ -19,31 +19,31 @@ func (suite *TagsTestSuite) SetupTest() {
 	suite.paprikaClient = paprikaClient
 }
 
-func (suite *TagsTestSuite) TestGetTags() {
-	tags, err := suite.paprikaClient.GetTags(nil)
+func (suite *TagsTestSuite) TestListTags() {
+	tags, err := suite.paprikaClient.ListTags(nil)
 	suite.NoError(err)
 	suite.NotEmpty(tags)
 
 	suite.Nil(tags[0].Coins)
 }
 
-func (suite *TagsTestSuite) TestGetTagsWithCoins() {
-	tags, err := suite.paprikaClient.GetTags(&TagsOptions{AdditionalFields: "coins"})
+func (suite *TagsTestSuite) TestListTagsWithCoins() {
+	tags, err := suite.paprikaClient.ListTags(&TagsOptions{AdditionalFields: "coins"})
 	suite.NoError(err)
 	suite.NotEmpty(tags)
 
 	suite.NotNil(tags[0].Coins)
 }
 
-func (suite *TagsTestSuite) TestGetTagByID() {
-	tag, err := suite.paprikaClient.GetTagByID("cryptocurrency", nil)
+func (suite *TagsTestSuite) TestGetTag() {
+	tag, err := suite.paprikaClient.GetTag("cryptocurrency", nil)
 	suite.NoError(err)
 	suite.NotNil(tag)
 	suite.Nil(tag.Coins)
 }
 
-func (suite *TagsTestSuite) TestGetTagByIDWithCoins() {
-	tag, err := suite.paprikaClient.GetTagByID("cryptocurrency", &TagsOptions{AdditionalFields: "coins"})
+func (suite *TagsTestSuite) TestGetTagWithCoins() {
+	tag, err := suite.paprikaClient.GetTag("cryptocurrency", &TagsOptions{AdditionalFields: "coins"})
 	suite.NoError(err)
 	suite.NotNil(tag)
 	suite.NotNil(tag.Coins)

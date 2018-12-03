@@ -19,8 +19,8 @@ func (suite *CoinsTestSuite) SetupTest() {
 	suite.paprikaClient = paprikaClient
 }
 
-func (suite *ClientTestSuite) TestGetCoins() {
-	coins, err := suite.paprikaClient.GetCoins()
+func (suite *ClientTestSuite) TestListCoins() {
+	coins, err := suite.paprikaClient.ListCoins()
 	suite.NoError(err)
 	suite.NotEmpty(coins)
 }

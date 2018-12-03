@@ -14,7 +14,7 @@ type TagsOptions struct {
 	AdditionalFields string
 }
 
-type TagExtended struct {
+type Tag struct {
 	ID          string   `json:"id"`
 	Name        string   `json:"name"`
 	Description string   `json:"description"`
@@ -43,8 +43,8 @@ func constructTagsURL(tagID *string, options *TagsOptions) string {
 	return uri
 }
 
-// GetTags returns a list of all tags.
-func (s *TagsService) GetTags(options *TagsOptions) (tags []*TagExtended, err error) {
+// ListTags returns a list of all tags.
+func (s *TagsService) ListTags(options *TagsOptions) (tags []*Tag, err error) {
 	uri := constructTagsURL(nil, options)
 
 	body, err := sendGET(s.httpClient, uri)
@@ -59,7 +59,7 @@ func (s *TagsService) GetTags(options *TagsOptions) (tags []*TagExtended, err er
 	return tags, nil
 }
 
-func (s *TagsService) GetTagByID(tagID string, options *TagsOptions) (tag *TagExtended, err error) {
+func (s *TagsService) GetTag(tagID string, options *TagsOptions) (tag *Tag, err error) {
 	uri := constructTagsURL(&tagID, options)
 
 	body, err := sendGET(s.httpClient, uri)
