@@ -18,10 +18,16 @@ func (suite *CoinsTestSuite) SetupTest() {
 	suite.paprikaClient = paprikaClient
 }
 
-func (suite *ClientTestSuite) TestListCoins() {
+func (suite *CoinsTestSuite) TestList() {
 	coins, err := suite.paprikaClient.Coins.List()
 	suite.NoError(err)
 	suite.NotEmpty(coins)
+}
+
+func (suite *CoinsTestSuite) TestGetByID() {
+	coin, err := suite.paprikaClient.Coins.GetByID("btc-bitcoin")
+	suite.NoError(err)
+	suite.NotEmpty(coin)
 }
 
 func TestCoinsTestSuite(t *testing.T) {

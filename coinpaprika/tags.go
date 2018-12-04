@@ -14,13 +14,14 @@ type TagsOptions struct {
 	AdditionalFields string
 }
 
+// Tag represents a tag (related to currency or ico).
 type Tag struct {
 	ID          *string  `json:"id"`
 	Name        *string  `json:"name"`
-	Description *string  `json:"description"`
-	Type        *string  `json:"type"`
 	CoinCounter *int64   `json:"coin_counter"`
 	ICOCounter  *int64   `json:"ico_counter"`
+	Description *string  `json:"description"`
+	Type        *string  `json:"type"`
 	Coins       []string `json:"coins"`
 }
 
