@@ -30,6 +30,12 @@ func (suite *CoinsTestSuite) TestGetByID() {
 	suite.NotEmpty(coin)
 }
 
+func (suite *CoinsTestSuite) TestGetTwitterTimelineByID() {
+	timeline, err := suite.paprikaClient.Coins.GetTwitterTimelineByID("btc-bitcoin")
+	suite.NoError(err)
+	suite.NotEmpty(timeline)
+}
+
 func TestCoinsTestSuite(t *testing.T) {
 	suite.Run(t, new(CoinsTestSuite))
 }

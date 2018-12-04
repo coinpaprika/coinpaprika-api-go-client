@@ -3,6 +3,7 @@ package coinpaprika
 import (
 	"encoding/json"
 	"fmt"
+	"time"
 )
 
 // CoinsService is used to get coins information.
@@ -47,6 +48,16 @@ type Coin struct {
 	Team              []Person            `json:"team"`
 }
 
+type Tweet struct {
+	Date        *time.Time `json:"date"`
+	UserName    *string    `json:"user_name"`
+	Status      *string    `json:"status"`
+	IsRetweet   *bool      `json:"is_retweet"`
+	StatusLink  *string    `json:"status_link"`
+	MediaLink   *string    `json:"media_link,omitempty"`
+	YoutubeLink *string    `json:"youtube_link,omitempty"`
+}
+
 // List returns list of all active coins listed on coinpaprika.
 func (s *CoinsService) List() (coins []*Coin, err error) {
 	url := fmt.Sprintf("%s/coins", baseURL)
@@ -77,4 +88,19 @@ func (s *CoinsService) GetByID(coinID string) (coin *Coin, err error) {
 	}
 
 	return coin, err
+}
+
+func (s *CoinsService) GetTwitterTimelineByID(coinID string) (timeline []*Tweet, err error) {
+	url := fmt.Sprintf("%s/coins/%s/twitter", baseURL, coinID)
+
+	body, err := sendGET(s.httpClient, url)
+	if err != nil {
+		return nil, err
+	}
+
+	if err := json.Unmarshal(body, &timeline); err != nil {
+		return timeline, err
+	}
+
+	return timeline, err
 }
