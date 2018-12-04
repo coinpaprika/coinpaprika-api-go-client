@@ -65,7 +65,7 @@ Check out the [`./examples`](./examples) directory.
 - [x] List coins
 - [x] Get coin by ID
 - [x] Get twitter timeline for coin
-- [ ] Get coin events by coin ID
+- [x] Get coin events by coin ID
 - [ ] Get exchanges by coin ID
 - [ ] Get markets by coin ID
 - [ ] Get latest OHLC
