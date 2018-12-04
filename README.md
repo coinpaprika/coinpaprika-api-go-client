@@ -59,7 +59,7 @@ Check out the [`./examples`](./examples) directory.
 
 ### Coins
 - [x] List coins
-- [ ] Get coin by ID
+- [x] Get coin by ID
 - [ ] Get twitter timeline for coin
 - [ ] Get coin events by coin ID
 - [ ] Get exchanges by coin ID
