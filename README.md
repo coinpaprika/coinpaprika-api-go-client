@@ -68,7 +68,7 @@ Check out the [`./examples`](./examples) directory.
 - [ ] Get historical OHLC
 
 ### People
-- [ ] Get people by ID
+- [x] Get people by ID
 
 ### Tags
 - [x] List tags

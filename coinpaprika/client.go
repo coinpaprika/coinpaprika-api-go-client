@@ -19,6 +19,7 @@ type Client struct {
 	Coins      CoinsService
 	Global     GlobalService
 	Tags       TagsService
+	People     PeopleService
 }
 
 type service struct {
@@ -40,6 +41,7 @@ func NewClient(httpClient *http.Client) *Client {
 	c.Coins.httpClient = c.httpClient
 	c.Global.httpClient = c.httpClient
 	c.Tags.httpClient = c.httpClient
+	c.People.httpClient = c.httpClient
 
 	return c
 }
