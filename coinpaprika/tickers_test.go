@@ -2,6 +2,7 @@ package coinpaprika
 
 import (
 	"testing"
+	"time"
 
 	"github.com/stretchr/testify/suite"
 )
@@ -49,6 +50,18 @@ func (suite *TickerTestSuite) TestGetByIDWithQuotes() {
 	suite.Nil(ticker.Quotes["USD"].Price)
 	suite.NotNil(ticker.Quotes["BTC"].Price)
 	suite.NotNil(ticker.Quotes["ETH"].Price)
+}
+
+func (suite *TickerTestSuite) TestGetHistoricalTickersByID() {
+	start := time.Date(2018, 1, 1, 0, 0, 0, 0, time.UTC)
+	end := time.Date(2018, 2, 1, 0, 0, 0, 0, time.UTC)
+	options := &TickersHistoricalOptions{Start: start, End: end, Limit: 10, Interval: "10m"}
+
+	tickers, err := suite.paprikaClient.Tickers.GetHistoricalTickersByID("btc-bitcoin", options)
+	suite.NoError(err)
+	suite.NotEmpty(tickers)
+
+	suite.Len(tickers, 10)
 }
 
 func TestTickerTestSuite(t *testing.T) {

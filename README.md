@@ -81,7 +81,7 @@ Check out the [`./examples`](./examples) directory.
 ### Tickers 
 - [x] Get tickers for all coins
 - [x] Get ticker information for specific coin
-- [ ] Get historical ticker for specific coin
+- [x] Get historical tickers for specific coin
 
 ### Exchanges
 - [ ] List exchanges
