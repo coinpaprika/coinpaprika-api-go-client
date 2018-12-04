@@ -17,37 +17,26 @@ type SearchResult struct {
 	Tags       []*Tag      `json:"tags"`
 }
 
-func constructSearchURL(query string, options *SearchOptions) string {
-	url := fmt.Sprintf("%s/search?q=%s", baseURL, query)
-
-	if options == nil {
-		return url
-	}
-
-	if options.Categories != "" {
-		url = fmt.Sprintf("%s&c=%s", url, options.Categories)
-	}
-	if options.Limit != 0 {
-		url = fmt.Sprintf("%s&limit=%v", url, options.Limit)
-	}
-
-	return url
-}
-
 // SearchOptions specifies optional parameters for search endpoint.
 type SearchOptions struct {
+	Query string `url:"q"`
+
 	// Comma separated categories to include in search results.
 	// Available options: currencies|exchanges|icos|people|tags.
 	// Eg. "currencies,exchanges"
-	Categories string
+	Categories string `url:"c,omitempty"`
 
 	// The number of results per category.
-	Limit int
+	Limit int `url:"limit,omitempty"`
 }
 
 // Search returns a list of currencies, exchanges, icos, people and tags for given query.
-func (s *SearchService) Search(query string, options *SearchOptions) (searchResult *SearchResult, err error) {
-	url := constructSearchURL(query, options)
+func (s *SearchService) Search(options *SearchOptions) (searchResult *SearchResult, err error) {
+	url := fmt.Sprintf("%s/search", baseURL)
+	url, err = constructURL(url, options)
+	if err != nil {
+		return nil, err
+	}
 
 	body, err := sendGET(s.httpClient, url)
 	if err != nil {

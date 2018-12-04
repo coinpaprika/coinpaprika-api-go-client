@@ -19,7 +19,8 @@ func (suite *SearchTestSuite) SetupTest() {
 }
 
 func (suite *SearchTestSuite) TestSearch() {
-	searchResult, err := suite.paprikaClient.Search.Search("a", nil)
+	options := &SearchOptions{Query: "a"}
+	searchResult, err := suite.paprikaClient.Search.Search(options)
 	suite.NoError(err)
 
 	suite.NotNil(searchResult.Currencies)
@@ -30,7 +31,8 @@ func (suite *SearchTestSuite) TestSearch() {
 }
 
 func (suite *SearchTestSuite) TestSearchLimit() {
-	searchResult, err := suite.paprikaClient.Search.Search("a", &SearchOptions{Limit: 1})
+	options := &SearchOptions{Query: "a", Limit: 1}
+	searchResult, err := suite.paprikaClient.Search.Search(options)
 	suite.NoError(err)
 
 	suite.Len(searchResult.Currencies, 1)
@@ -41,7 +43,8 @@ func (suite *SearchTestSuite) TestSearchLimit() {
 }
 
 func (suite *SearchTestSuite) TestSearchCategories() {
-	searchResult, err := suite.paprikaClient.Search.Search("a", &SearchOptions{Categories: "currencies,exchanges"})
+	options := &SearchOptions{Query: "a", Categories: "currencies,exchanges"}
+	searchResult, err := suite.paprikaClient.Search.Search(options)
 	suite.NoError(err)
 
 	suite.NotNil(searchResult.Currencies)

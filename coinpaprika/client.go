@@ -4,6 +4,10 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"net/url"
+	"reflect"
+
+	"github.com/google/go-querystring/query"
 )
 
 const (
@@ -44,6 +48,25 @@ func NewClient(httpClient *http.Client) *Client {
 	c.People.httpClient = c.httpClient
 
 	return c
+}
+
+func constructURL(rawURL string, options interface{}) (string, error) {
+	if v := reflect.ValueOf(options); v.Kind() == reflect.Ptr && v.IsNil() {
+		return rawURL, nil
+	}
+
+	parsedURL, err := url.Parse(rawURL)
+	if err != nil {
+		return rawURL, err
+	}
+
+	values, err := query.Values(options)
+	if err != nil {
+		return rawURL, err
+	}
+
+	parsedURL.RawQuery = values.Encode()
+	return parsedURL.String(), nil
 }
 
 func sendGET(client *http.Client, url string) ([]byte, error) {
