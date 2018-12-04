@@ -18,5 +18,7 @@ func main() {
 		panic(err)
 	}
 
-	fmt.Println("Current MarketCapUSD:", coins.MarketCapUSD)
+	if coins.MarketCapUSD != nil {
+		fmt.Printf("Current market cap: %.2f USD \n", *coins.MarketCapUSD)
+	}
 }

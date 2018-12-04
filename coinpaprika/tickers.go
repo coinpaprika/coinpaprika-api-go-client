@@ -40,9 +40,17 @@ type Quote struct {
 	PercentFromPriceATH *float64 `json:"percent_from_price_ath"`
 }
 
+type TickersOptions struct {
+	Quotes string `url:"quotes,omitempty"`
+}
+
 // List gets ticker information for all coins listed on coinpaprika.
-func (s *TickersService) List() (tickers []*Ticker, err error) {
+func (s *TickersService) List(options *TickersOptions) (tickers []*Ticker, err error) {
 	url := fmt.Sprintf("%s/tickers", baseURL)
+	url, err = constructURL(url, options)
+	if err != nil {
+		return nil, err
+	}
 
 	body, err := sendGET(s.httpClient, url)
 	if err != nil {
@@ -57,8 +65,12 @@ func (s *TickersService) List() (tickers []*Ticker, err error) {
 }
 
 // GetByID gets ticker information for specific coin by id (eg. btc-bitcoin).
-func (s *TickersService) GetByID(id string) (ticker *Ticker, err error) {
+func (s *TickersService) GetByID(id string, options *TickersOptions) (ticker *Ticker, err error) {
 	url := fmt.Sprintf("%s/tickers/%s", baseURL, id)
+	url, err = constructURL(url, options)
+	if err != nil {
+		return nil, err
+	}
 
 	body, err := sendGET(s.httpClient, url)
 	if err != nil {
