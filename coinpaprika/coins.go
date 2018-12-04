@@ -58,6 +58,16 @@ type Tweet struct {
 	YoutubeLink *string    `json:"youtube_link,omitempty"`
 }
 
+type Event struct {
+	Date           *string `json:"date"`
+	DateTo         *string `json:"date_to"`
+	Name           *string `json:"name"`
+	Description    *string `json:"description"`
+	IsConference   *bool   `json:"is_conference"`
+	Link           *string `json:"link"`
+	ProofImageLink *string `json:"proof_image_link"`
+}
+
 // List returns list of all active coins listed on coinpaprika.
 func (s *CoinsService) List() (coins []*Coin, err error) {
 	url := fmt.Sprintf("%s/coins", baseURL)
@@ -103,4 +113,19 @@ func (s *CoinsService) GetTwitterTimelineByID(coinID string) (timeline []*Tweet,
 	}
 
 	return timeline, err
+}
+
+func (s *CoinsService) GetCoinEventsByID(coinID string) (events []*Event, err error) {
+	url := fmt.Sprintf("%s/coins/%s/events", baseURL, coinID)
+
+	body, err := sendGET(s.httpClient, url)
+	if err != nil {
+		return nil, err
+	}
+
+	if err := json.Unmarshal(body, &events); err != nil {
+		return events, err
+	}
+
+	return events, err
 }
