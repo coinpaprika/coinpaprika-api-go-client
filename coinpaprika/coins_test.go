@@ -37,10 +37,16 @@ func (suite *CoinsTestSuite) TestGetTwitterTimelineByCoinID() {
 	suite.NotEmpty(timeline)
 }
 
-func (suite *CoinsTestSuite) TestGetCoinEventsByCoinID() {
-	events, err := suite.paprikaClient.Coins.GetCoinEventsByCoinID("btc-bitcoin")
+func (suite *CoinsTestSuite) TestGetEventsByCoinID() {
+	events, err := suite.paprikaClient.Coins.GetEventsByCoinID("btc-bitcoin")
 	suite.NoError(err)
 	suite.NotEmpty(events)
+}
+
+func (suite *CoinsTestSuite) TestGetExchangesByCoinID() {
+	exchanges, err := suite.paprikaClient.Coins.GetExchangesByCoinID("btc-bitcoin")
+	suite.NoError(err)
+	suite.NotEmpty(exchanges)
 }
 
 func (suite *CoinsTestSuite) TestGetLatestOHLCVByCoinID() {

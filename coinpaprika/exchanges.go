@@ -22,20 +22,21 @@ type ExchangeFiat struct {
 
 // Exchange represents an exchange.
 type Exchange struct {
-	ID                 *string                  `json:"id"`
-	Name               *string                  `json:"name"`
-	Message            *string                  `json:"message"`
-	Active             *bool                    `json:"active"`
-	MarketsDataFetched *bool                    `json:"markets_data_fetched"`
-	Rank               *int64                   `json:"rank"`
-	AdjustedRank       *int64                   `json:"adjusted_rank"`
-	ReportedRank       *int64                   `json:"reported_rank"`
-	Currencies         *int64                   `json:"currencies"`
-	Markets            *int64                   `json:"markets"`
-	Fiats              []ExchangeFiat           `json:"fiats"`
-	Quotes             map[string]ExchangeQuote `json:"quotes"`
-	Links              map[string][]string      `json:"links"`
-	LastUpdated        *string                  `json:"last_updated"`
+	ID                     *string                  `json:"id"`
+	Name                   *string                  `json:"name"`
+	Message                *string                  `json:"message"`
+	Active                 *bool                    `json:"active"`
+	MarketsDataFetched     *bool                    `json:"markets_data_fetched"`
+	Rank                   *int64                   `json:"rank"`
+	AdjustedRank           *int64                   `json:"adjusted_rank"`
+	ReportedRank           *int64                   `json:"reported_rank"`
+	Currencies             *int64                   `json:"currencies"`
+	Markets                *int64                   `json:"markets"`
+	AdjustedVolume24hShare *float64                 `json:"adjusted_volume_24h_share"`
+	Fiats                  []ExchangeFiat           `json:"fiats"`
+	Quotes                 map[string]ExchangeQuote `json:"quotes"`
+	Links                  map[string][]string      `json:"links"`
+	LastUpdated            *string                  `json:"last_updated"`
 }
 
 // MarketQuote represents market price and volume data in quote currency.

@@ -143,8 +143,8 @@ func (s *CoinsService) GetTwitterTimelineByCoinID(coinID string) (timeline []*Tw
 	return timeline, err
 }
 
-// GetCoinEventsByCoinID gets events for a coin by coin id (eg. btc-bitcoin).
-func (s *CoinsService) GetCoinEventsByCoinID(coinID string) (events []*Event, err error) {
+// GetEventsByCoinID gets events for a coin by coin id (eg. btc-bitcoin).
+func (s *CoinsService) GetEventsByCoinID(coinID string) (events []*Event, err error) {
 	url := fmt.Sprintf("%s/coins/%s/events", baseURL, coinID)
 
 	body, err := sendGET(s.httpClient, url)
@@ -157,6 +157,22 @@ func (s *CoinsService) GetCoinEventsByCoinID(coinID string) (events []*Event, er
 	}
 
 	return events, err
+}
+
+// GetExchangesByCoinID gets exchanges for a coin by coin id.
+func (s *CoinsService) GetExchangesByCoinID(coinID string) (exchanges []*Exchange, err error) {
+	url := fmt.Sprintf("%s/coins/%s/exchanges", baseURL, coinID)
+
+	body, err := sendGET(s.httpClient, url)
+	if err != nil {
+		return nil, err
+	}
+
+	if err := json.Unmarshal(body, &exchanges); err != nil {
+		return exchanges, err
+	}
+
+	return exchanges, err
 }
 
 // GetLatestOHLCVByCoinID gets latest ohlcv values for a coin by coin id (eg. btc-bitcoin).
