@@ -10,8 +10,8 @@ type ExchangesService service
 
 // ExchangeQuote represents exchange volume data in quote currency.
 type ExchangeQuote struct {
-	ReportedVolume24h *int64 `json:"reported_volume_24h"`
-	AdjustedVolume24h *int64 `json:"adjusted_volume_24h"`
+	ReportedVolume24h *float64 `json:"reported_volume_24h"`
+	AdjustedVolume24h *float64 `json:"adjusted_volume_24h"`
 }
 
 // ExchangeFiat represents fiat traded on exchange.
