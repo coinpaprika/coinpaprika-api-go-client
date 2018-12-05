@@ -84,9 +84,9 @@ Check out the [`./examples`](./examples) directory.
 - [x] Get historical tickers for specific coin
 
 ### Exchanges
-- [ ] List exchanges
-- [ ] Get exchange by ID
-- [ ] List markets by exchange ID
+- [x] List exchanges
+- [x] Get exchange by ID
+- [x] List markets by exchange ID
 
 ### Search
 - [x] Search tool

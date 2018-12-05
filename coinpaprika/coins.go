@@ -127,8 +127,8 @@ func (s *CoinsService) GetByID(coinID string) (coin *Coin, err error) {
 	return coin, err
 }
 
-// GetTwitterTimelineByID gets twitter timeline for a coin by coin id (eg. btc-bitcoin).
-func (s *CoinsService) GetTwitterTimelineByID(coinID string) (timeline []*Tweet, err error) {
+// GetTwitterTimelineByCoinID gets twitter timeline for a coin by coin id (eg. btc-bitcoin).
+func (s *CoinsService) GetTwitterTimelineByCoinID(coinID string) (timeline []*Tweet, err error) {
 	url := fmt.Sprintf("%s/coins/%s/twitter", baseURL, coinID)
 
 	body, err := sendGET(s.httpClient, url)
@@ -143,8 +143,8 @@ func (s *CoinsService) GetTwitterTimelineByID(coinID string) (timeline []*Tweet,
 	return timeline, err
 }
 
-// GetCoinEventsByID gets events for a coin by coin id (eg. btc-bitcoin).
-func (s *CoinsService) GetCoinEventsByID(coinID string) (events []*Event, err error) {
+// GetCoinEventsByCoinID gets events for a coin by coin id (eg. btc-bitcoin).
+func (s *CoinsService) GetCoinEventsByCoinID(coinID string) (events []*Event, err error) {
 	url := fmt.Sprintf("%s/coins/%s/events", baseURL, coinID)
 
 	body, err := sendGET(s.httpClient, url)
@@ -159,8 +159,8 @@ func (s *CoinsService) GetCoinEventsByID(coinID string) (events []*Event, err er
 	return events, err
 }
 
-// GetLatestOHLCVByID gets latest ohlcv values for a coin by coin id (eg. btc-bitcoin).
-func (s *CoinsService) GetLatestOHLCVByID(coinID string, options *LatestOHLCVOptions) (entries []*OHLCVEntry, err error) {
+// GetLatestOHLCVByCoinID gets latest ohlcv values for a coin by coin id (eg. btc-bitcoin).
+func (s *CoinsService) GetLatestOHLCVByCoinID(coinID string, options *LatestOHLCVOptions) (entries []*OHLCVEntry, err error) {
 	url := fmt.Sprintf("%s/coins/%s/ohlcv/latest", baseURL, coinID)
 	url, err = constructURL(url, options)
 	if err != nil {
@@ -179,8 +179,8 @@ func (s *CoinsService) GetLatestOHLCVByID(coinID string, options *LatestOHLCVOpt
 	return entries, err
 }
 
-// GetHistoricalOHLCVByID gets historical ohlcv values for a coin by coin id (eg. btc-bitcoin).
-func (s *CoinsService) GetHistoricalOHLCVByID(coinID string, options *HistoricalOHLCVOptions) (entries []*OHLCVEntry, err error) {
+// GetHistoricalOHLCVByCoinID gets historical ohlcv values for a coin by coin id (eg. btc-bitcoin).
+func (s *CoinsService) GetHistoricalOHLCVByCoinID(coinID string, options *HistoricalOHLCVOptions) (entries []*OHLCVEntry, err error) {
 	url := fmt.Sprintf("%s/coins/%s/ohlcv/historical", baseURL, coinID)
 	url, err = constructURL(url, options)
 	if err != nil {

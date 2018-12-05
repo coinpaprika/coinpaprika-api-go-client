@@ -31,40 +31,40 @@ func (suite *CoinsTestSuite) TestGetByID() {
 	suite.NotEmpty(coin)
 }
 
-func (suite *CoinsTestSuite) TestGetTwitterTimelineByID() {
-	timeline, err := suite.paprikaClient.Coins.GetTwitterTimelineByID("btc-bitcoin")
+func (suite *CoinsTestSuite) TestGetTwitterTimelineByCoinID() {
+	timeline, err := suite.paprikaClient.Coins.GetTwitterTimelineByCoinID("btc-bitcoin")
 	suite.NoError(err)
 	suite.NotEmpty(timeline)
 }
 
-func (suite *CoinsTestSuite) TestGetCoinEventsByID() {
-	events, err := suite.paprikaClient.Coins.GetCoinEventsByID("btc-bitcoin")
+func (suite *CoinsTestSuite) TestGetCoinEventsByCoinID() {
+	events, err := suite.paprikaClient.Coins.GetCoinEventsByCoinID("btc-bitcoin")
 	suite.NoError(err)
 	suite.NotEmpty(events)
 }
 
-func (suite *CoinsTestSuite) TestGetLatestOHLCVByID() {
-	entries, err := suite.paprikaClient.Coins.GetLatestOHLCVByID("btc-bitcoin", nil)
+func (suite *CoinsTestSuite) TestGetLatestOHLCVByCoinID() {
+	entries, err := suite.paprikaClient.Coins.GetLatestOHLCVByCoinID("btc-bitcoin", nil)
 	suite.NoError(err)
 	suite.NotEmpty(entries)
 	suite.Len(entries, 1)
 }
 
-func (suite *CoinsTestSuite) TestGetLatestOHLCVByIDWithQuote() {
+func (suite *CoinsTestSuite) TestGetLatestOHLCVByCoinIDWithQuote() {
 	options := &LatestOHLCVOptions{Quote: "btc"}
-	entries, err := suite.paprikaClient.Coins.GetLatestOHLCVByID("eth-ethereum", options)
+	entries, err := suite.paprikaClient.Coins.GetLatestOHLCVByCoinID("eth-ethereum", options)
 	suite.NoError(err)
 	suite.NotEmpty(entries)
 	suite.Len(entries, 1)
 }
 
-func (suite *CoinsTestSuite) TestGetHistoricalOHLCVByID() {
+func (suite *CoinsTestSuite) TestGetHistoricalOHLCVByCoinID() {
 	options := &HistoricalOHLCVOptions{
 		Start: time.Date(2018, 1, 1, 0, 0, 0, 0, time.UTC),
 		End:   time.Date(2018, 1, 11, 0, 0, 0, 0, time.UTC),
 		Quote: "btc",
 	}
-	entries, err := suite.paprikaClient.Coins.GetHistoricalOHLCVByID("btc-bitcoin", options)
+	entries, err := suite.paprikaClient.Coins.GetHistoricalOHLCVByCoinID("btc-bitcoin", options)
 	suite.NoError(err)
 	suite.NotEmpty(entries)
 	suite.Len(entries, 10)

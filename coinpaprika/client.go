@@ -24,6 +24,7 @@ type Client struct {
 	Global     GlobalService
 	Tags       TagsService
 	People     PeopleService
+	Exchanges  ExchangesService
 }
 
 type service struct {
@@ -46,6 +47,7 @@ func NewClient(httpClient *http.Client) *Client {
 	c.Global.httpClient = c.httpClient
 	c.Tags.httpClient = c.httpClient
 	c.People.httpClient = c.httpClient
+	c.Exchanges.httpClient = c.httpClient
 
 	return c
 }
