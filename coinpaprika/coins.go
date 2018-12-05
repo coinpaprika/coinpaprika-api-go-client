@@ -175,6 +175,22 @@ func (s *CoinsService) GetExchangesByCoinID(coinID string) (exchanges []*Exchang
 	return exchanges, err
 }
 
+// GetMarketsByCoinID gets markets for a coin by coin id.
+func (s *CoinsService) GetMarketsByCoinID(coinID string) (markets []*Market, err error) {
+	url := fmt.Sprintf("%s/coins/%s/markets", baseURL, coinID)
+
+	body, err := sendGET(s.httpClient, url)
+	if err != nil {
+		return nil, err
+	}
+
+	if err := json.Unmarshal(body, &markets); err != nil {
+		return markets, err
+	}
+
+	return markets, err
+}
+
 // GetLatestOHLCVByCoinID gets latest ohlcv values for a coin by coin id (eg. btc-bitcoin).
 func (s *CoinsService) GetLatestOHLCVByCoinID(coinID string, options *LatestOHLCVOptions) (entries []*OHLCVEntry, err error) {
 	url := fmt.Sprintf("%s/coins/%s/ohlcv/latest", baseURL, coinID)

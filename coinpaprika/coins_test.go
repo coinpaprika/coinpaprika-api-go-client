@@ -49,6 +49,12 @@ func (suite *CoinsTestSuite) TestGetExchangesByCoinID() {
 	suite.NotEmpty(exchanges)
 }
 
+func (suite *CoinsTestSuite) TestGetMarketsByCoinID() {
+	markets, err := suite.paprikaClient.Coins.GetMarketsByCoinID("btc-bitcoin")
+	suite.NoError(err)
+	suite.NotEmpty(markets)
+}
+
 func (suite *CoinsTestSuite) TestGetLatestOHLCVByCoinID() {
 	entries, err := suite.paprikaClient.Coins.GetLatestOHLCVByCoinID("btc-bitcoin", nil)
 	suite.NoError(err)

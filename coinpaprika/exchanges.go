@@ -47,18 +47,21 @@ type MarketQuote struct {
 
 // Market represents a market.
 type Market struct {
-	Pair                *string                `json:"pair"`
-	BaseCurrencyID      *string                `json:"base_currency_id"`
-	BaseCurrencyName    *string                `json:"base_currency_name"`
-	QuoteCurrencyID     *string                `json:"quote_currency_id"`
-	QuoteCurrencyName   *string                `json:"quote_currency_name"`
-	MarketURL           *string                `json:"market_url"`
-	Category            *string                `json:"category"`
-	FeeType             *string                `json:"fee_type"`
-	Outlier             *bool                  `json:"outlier"`
-	ReportedVolumeShare *float64               `json:"reported_volume_24h_share"`
-	Quotes              map[string]MarketQuote `json:"quotes"`
-	LastUpdated         *string                `json:"last_updated"`
+	Pair                   *string                `json:"pair"`
+	BaseCurrencyID         *string                `json:"base_currency_id"`
+	BaseCurrencyName       *string                `json:"base_currency_name"`
+	QuoteCurrencyID        *string                `json:"quote_currency_id"`
+	QuoteCurrencyName      *string                `json:"quote_currency_name"`
+	MarketURL              *string                `json:"market_url"`
+	Category               *string                `json:"category"`
+	FeeType                *string                `json:"fee_type"`
+	Outlier                *bool                  `json:"outlier"`
+	ReportedVolume24hShare *float64               `json:"reported_volume_24h_share"`
+	Quotes                 map[string]MarketQuote `json:"quotes"`
+	LastUpdated            *string                `json:"last_updated"`
+	ExchangeID             *string                `json:"exchange_id"`
+	ExchangeName           *string                `json:"exchange_name"`
+	AdjustedVolume24hShare *float64               `json:"adjusted_volume_24h_share"`
 }
 
 // ExchangesOptions specifies optional parameters for exchanges endpoints.
