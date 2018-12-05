@@ -37,11 +37,8 @@ func (s *TagsService) List(options *TagsOptions) (tags []*Tag, err error) {
 		return nil, err
 	}
 
-	if err := json.Unmarshal(body, &tags); err != nil {
-		return tags, err
-	}
-
-	return tags, nil
+	err = json.Unmarshal(body, &tags)
+	return tags, err
 }
 
 // GetByID return a tag by id.
@@ -57,9 +54,6 @@ func (s *TagsService) GetByID(tagID string, options *TagsOptions) (tag *Tag, err
 		return nil, err
 	}
 
-	if err := json.Unmarshal(body, &tag); err != nil {
-		return tag, err
-	}
-
-	return tag, nil
+	err = json.Unmarshal(body, &tag)
+	return tag, err
 }

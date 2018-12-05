@@ -18,7 +18,7 @@ type GlobalStats struct {
 }
 
 // Get gets market overview data.
-func (s *GlobalService) Get() (*GlobalStats, error) {
+func (s *GlobalService) Get() (g *GlobalStats, err error) {
 	url := fmt.Sprintf("%s/global", baseURL)
 
 	body, err := sendGET(s.httpClient, url)
@@ -26,10 +26,7 @@ func (s *GlobalService) Get() (*GlobalStats, error) {
 		return nil, err
 	}
 
-	var g GlobalStats
-	if err := json.Unmarshal(body, &g); err != nil {
-		return nil, err
-	}
+	err = json.Unmarshal(body, &g)
+	return g, err
 
-	return &g, nil
 }

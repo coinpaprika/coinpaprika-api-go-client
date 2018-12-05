@@ -87,10 +87,7 @@ func (s *ExchangesService) List(options *ExchangesOptions) (exchanges []*Exchang
 		return nil, err
 	}
 
-	if err := json.Unmarshal(body, &exchanges); err != nil {
-		return exchanges, err
-	}
-
+	err = json.Unmarshal(body, &exchanges)
 	return exchanges, err
 }
 
@@ -107,10 +104,7 @@ func (s *ExchangesService) GetByID(exchangeID string, options *ExchangesOptions)
 		return nil, err
 	}
 
-	if err := json.Unmarshal(body, &exchange); err != nil {
-		return exchange, err
-	}
-
+	err = json.Unmarshal(body, &exchange)
 	return exchange, err
 }
 
@@ -127,9 +121,6 @@ func (s *ExchangesService) GetMarketsByExchangeID(exchangeID string, options *Ma
 		return nil, err
 	}
 
-	if err := json.Unmarshal(body, &markets); err != nil {
-		return markets, err
-	}
-
+	err = json.Unmarshal(body, &markets)
 	return markets, err
 }

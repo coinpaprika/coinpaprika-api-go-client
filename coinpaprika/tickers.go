@@ -76,10 +76,7 @@ func (s *TickersService) List(options *TickersOptions) (tickers []*Ticker, err e
 		return nil, err
 	}
 
-	if err := json.Unmarshal(body, &tickers); err != nil {
-		return tickers, err
-	}
-
+	err = json.Unmarshal(body, &tickers)
 	return tickers, err
 }
 
@@ -96,10 +93,7 @@ func (s *TickersService) GetByID(coinID string, options *TickersOptions) (ticker
 		return nil, err
 	}
 
-	if err := json.Unmarshal(body, &ticker); err != nil {
-		return ticker, err
-	}
-
+	err = json.Unmarshal(body, &ticker)
 	return ticker, err
 }
 
@@ -116,9 +110,6 @@ func (s *TickersService) GetHistoricalTickersByID(coinID string, options *Ticker
 		return nil, err
 	}
 
-	if err := json.Unmarshal(body, &tickersHistorical); err != nil {
-		return tickersHistorical, err
-	}
-
+	err = json.Unmarshal(body, &tickersHistorical)
 	return tickersHistorical, err
 }

@@ -41,9 +41,6 @@ func (s *PeopleService) GetByID(personID string) (person *Person, err error) {
 		return nil, err
 	}
 
-	if err := json.Unmarshal(body, &person); err != nil {
-		return person, err
-	}
-
+	err = json.Unmarshal(body, &person)
 	return person, err
 }

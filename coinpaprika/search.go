@@ -43,9 +43,6 @@ func (s *SearchService) Search(options *SearchOptions) (searchResult *SearchResu
 		return nil, err
 	}
 
-	if err := json.Unmarshal(body, &searchResult); err != nil {
-		return searchResult, err
-	}
-
-	return searchResult, nil
+	err = json.Unmarshal(body, &searchResult)
+	return searchResult, err
 }

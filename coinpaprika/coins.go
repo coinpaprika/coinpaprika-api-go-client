@@ -104,10 +104,7 @@ func (s *CoinsService) List() (coins []*Coin, err error) {
 		return nil, err
 	}
 
-	if err := json.Unmarshal(body, &coins); err != nil {
-		return coins, err
-	}
-
+	err = json.Unmarshal(body, &coins)
 	return coins, err
 }
 
@@ -120,10 +117,7 @@ func (s *CoinsService) GetByID(coinID string) (coin *Coin, err error) {
 		return nil, err
 	}
 
-	if err := json.Unmarshal(body, &coin); err != nil {
-		return coin, err
-	}
-
+	err = json.Unmarshal(body, &coin)
 	return coin, err
 }
 
@@ -136,10 +130,7 @@ func (s *CoinsService) GetTwitterTimelineByCoinID(coinID string) (timeline []*Tw
 		return nil, err
 	}
 
-	if err := json.Unmarshal(body, &timeline); err != nil {
-		return timeline, err
-	}
-
+	err = json.Unmarshal(body, &timeline)
 	return timeline, err
 }
 
@@ -152,10 +143,7 @@ func (s *CoinsService) GetEventsByCoinID(coinID string) (events []*Event, err er
 		return nil, err
 	}
 
-	if err := json.Unmarshal(body, &events); err != nil {
-		return events, err
-	}
-
+	err = json.Unmarshal(body, &events)
 	return events, err
 }
 
@@ -168,10 +156,7 @@ func (s *CoinsService) GetExchangesByCoinID(coinID string) (exchanges []*Exchang
 		return nil, err
 	}
 
-	if err := json.Unmarshal(body, &exchanges); err != nil {
-		return exchanges, err
-	}
-
+	err = json.Unmarshal(body, &exchanges)
 	return exchanges, err
 }
 
@@ -184,10 +169,7 @@ func (s *CoinsService) GetMarketsByCoinID(coinID string) (markets []*Market, err
 		return nil, err
 	}
 
-	if err := json.Unmarshal(body, &markets); err != nil {
-		return markets, err
-	}
-
+	err = json.Unmarshal(body, &markets)
 	return markets, err
 }
 
@@ -204,10 +186,7 @@ func (s *CoinsService) GetLatestOHLCVByCoinID(coinID string, options *LatestOHLC
 		return nil, err
 	}
 
-	if err := json.Unmarshal(body, &entries); err != nil {
-		return entries, err
-	}
-
+	err = json.Unmarshal(body, &entries)
 	return entries, err
 }
 
@@ -224,9 +203,6 @@ func (s *CoinsService) GetHistoricalOHLCVByCoinID(coinID string, options *Histor
 		return nil, err
 	}
 
-	if err := json.Unmarshal(body, &entries); err != nil {
-		return entries, err
-	}
-
+	err = json.Unmarshal(body, &entries)
 	return entries, err
 }
