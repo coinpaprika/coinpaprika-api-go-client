@@ -68,8 +68,8 @@ Check out the [`./examples`](./examples) directory.
 - [x] Get coin events by coin ID
 - [ ] Get exchanges by coin ID
 - [ ] Get markets by coin ID
-- [ ] Get latest OHLC
-- [ ] Get historical OHLC
+- [x] Get latest OHLCV
+- [x] Get historical OHLCV
 
 ### People
 - [x] Get people by ID

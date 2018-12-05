@@ -68,6 +68,28 @@ type Event struct {
 	ProofImageLink *string `json:"proof_image_link"`
 }
 
+type OHLCVEntry struct {
+	TimeOpen  *time.Time `json:"time_open"`
+	TimeClose *time.Time `json:"time_close"`
+	Open      *float64   `json:"open"`
+	High      *float64   `json:"high"`
+	Low       *float64   `json:"low"`
+	Close     *float64   `json:"close"`
+	Volume    *int64     `json:"volume"`
+	MarketCap *int64     `json:"market_cap"`
+}
+
+type LatestOHLCVOptions struct {
+	Quote string `url:"quote,omitempty"`
+}
+
+type HistoricalOHLCVOptions struct {
+	Start time.Time `url:"start"`
+	End   time.Time `url:"end,omitempty"`
+	Limit int       `url:"limit,omitempty"`
+	Quote string    `url:"quote,omitempty"`
+}
+
 // List returns list of all active coins listed on coinpaprika.
 func (s *CoinsService) List() (coins []*Coin, err error) {
 	url := fmt.Sprintf("%s/coins", baseURL)
@@ -128,4 +150,42 @@ func (s *CoinsService) GetCoinEventsByID(coinID string) (events []*Event, err er
 	}
 
 	return events, err
+}
+
+func (s *CoinsService) GetLatestOHLCVByID(coinID string, options *LatestOHLCVOptions) (entries []*OHLCVEntry, err error) {
+	url := fmt.Sprintf("%s/coins/%s/ohlcv/latest", baseURL, coinID)
+	url, err = constructURL(url, options)
+	if err != nil {
+		return nil, err
+	}
+
+	body, err := sendGET(s.httpClient, url)
+	if err != nil {
+		return nil, err
+	}
+
+	if err := json.Unmarshal(body, &entries); err != nil {
+		return entries, err
+	}
+
+	return entries, err
+}
+
+func (s *CoinsService) GetHistoricalOHLCVByID(coinID string, options *HistoricalOHLCVOptions) (entries []*OHLCVEntry, err error) {
+	url := fmt.Sprintf("%s/coins/%s/ohlcv/historical", baseURL, coinID)
+	url, err = constructURL(url, options)
+	if err != nil {
+		return nil, err
+	}
+
+	body, err := sendGET(s.httpClient, url)
+	if err != nil {
+		return nil, err
+	}
+
+	if err := json.Unmarshal(body, &entries); err != nil {
+		return entries, err
+	}
+
+	return entries, err
 }
