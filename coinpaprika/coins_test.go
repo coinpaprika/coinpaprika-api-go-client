@@ -79,7 +79,7 @@ func (suite *CoinsTestSuite) TestGetHistoricalOHLCVByCoinID() {
 	entries, err := suite.paprikaClient.Coins.GetHistoricalOHLCVByCoinID("btc-bitcoin", options)
 	suite.NoError(err)
 	suite.NotEmpty(entries)
-	suite.Len(entries, 10)
+	suite.Len(entries, 11)
 }
 
 func TestCoinsTestSuite(t *testing.T) {
