@@ -22,6 +22,7 @@ type Tag struct {
 	Description *string  `json:"description"`
 	Type        *string  `json:"type"`
 	Coins       []string `json:"coins"`
+	ICOs        []string `json:"icos"`
 }
 
 // List returns a list of all tags.

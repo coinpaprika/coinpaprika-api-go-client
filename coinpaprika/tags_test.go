@@ -48,6 +48,13 @@ func (suite *TagsTestSuite) TestGetWithCoins() {
 	suite.NotEmpty(tag.Coins)
 }
 
+func (suite *TagsTestSuite) TestGetWithICOs() {
+	tag, err := suite.paprikaClient.Tags.GetByID("cryptocurrency", &TagsOptions{AdditionalFields: "icos"})
+	suite.NoError(err)
+	suite.NotNil(tag)
+	suite.NotEmpty(tag.ICOs)
+}
+
 func TestTagsTestSuite(t *testing.T) {
 	suite.Run(t, new(TagsTestSuite))
 }
