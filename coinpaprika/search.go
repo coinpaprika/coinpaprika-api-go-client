@@ -28,6 +28,8 @@ type SearchOptions struct {
 
 	// The number of results per category.
 	Limit int `url:"limit,omitempty"`
+
+	Modifier string `url:"modifier,omitempty"`
 }
 
 // Search returns a list of currencies, exchanges, icos, people and tags for given query.
