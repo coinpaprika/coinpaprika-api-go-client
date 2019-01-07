@@ -56,7 +56,7 @@ paprikaClient := coinpaprika.NewClient(customClient)
 Check out the [`./examples`](./examples) directory.
 
 
-## Implementation status (API v1.3.0)
+## Implementation status (API v1.4.3)
 
 ### Global
 - [x] Get market overview data
