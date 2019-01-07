@@ -28,6 +28,10 @@ func (suite *GlobalTestSuite) TestGet() {
 	suite.NotZero(globalStats.LastUpdated)
 	suite.NotZero(globalStats.BitcoinDominancePercentage)
 	suite.NotZero(globalStats.CryptocurrenciesNumber)
+	suite.NotZero(globalStats.MarketCapATHValue)
+	suite.NotZero(globalStats.MarketCapATHDate)
+	suite.NotZero(globalStats.Volume24hATHValue)
+	suite.NotZero(globalStats.Volume24hATHDate)
 }
 
 func TestGlobalTestSuite(t *testing.T) {
