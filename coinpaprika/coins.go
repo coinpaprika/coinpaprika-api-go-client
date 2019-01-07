@@ -44,8 +44,16 @@ type Coin struct {
 	HashAlgorithm     *string             `json:"hash_algorithm"`
 	Whitepaper        *Whitepaper         `json:"whitepaper"`
 	Links             map[string][]string `json:"links"`
+	LinksExtended     []CoinLink          `json:"links_extended"`
 	Tags              []Tag               `json:"tags"`
 	Team              []Person            `json:"team"`
+}
+
+// CoinLink represents coin link with additional information like statistics or type of the link.
+type CoinLink struct {
+	URL   *string            `json:"url"`
+	Type  *string            `json:"type"`
+	Stats map[string]float64 `json:"stats"`
 }
 
 // Tweet represents twitter timeline entry.
