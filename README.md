@@ -45,7 +45,7 @@ func main() {
 
 ## Setting custom HTTP client
 
-```
+```go
 customClient := &http.Client{Timeout: 10 * time.Second}
 paprikaClient := coinpaprika.NewClient(customClient)
 ```
