@@ -19,6 +19,8 @@ type GlobalStats struct {
 	MarketCapATHDate           *time.Time `json:"market_cap_ath_date"`
 	Volume24hATHValue          *float64   `json:"volume_24h_ath_value"`
 	Volume24hATHDate           *time.Time `json:"volume_24h_ath_date"`
+	MarketCapChange24h         *float64   `json:"market_cap_change_24h"`
+	Volume24hChange24h         *float64   `json:"volume_24h_change_24h"`
 	LastUpdated                *int64     `json:"last_updated"`
 }
 

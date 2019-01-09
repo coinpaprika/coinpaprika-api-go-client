@@ -32,6 +32,8 @@ func (suite *GlobalTestSuite) TestGet() {
 	suite.NotZero(globalStats.MarketCapATHDate)
 	suite.NotZero(globalStats.Volume24hATHValue)
 	suite.NotZero(globalStats.Volume24hATHDate)
+	suite.NotZero(globalStats.Volume24hChange24h)
+	suite.NotZero(globalStats.MarketCapChange24h)
 }
 
 func TestGlobalTestSuite(t *testing.T) {
