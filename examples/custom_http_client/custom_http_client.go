@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/coinpaprika/coinpaprika-api-go-client/coinpaprika"
+	"github.com/coinpaprika/coinpaprika-api-go-client/v2/coinpaprika"
 )
 
 func main() {
