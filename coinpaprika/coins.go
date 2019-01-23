@@ -69,6 +69,7 @@ type Tweet struct {
 
 // Event represents event on related to coin.
 type Event struct {
+	ID             *string `json:"id"`
 	Date           *string `json:"date"`
 	DateTo         *string `json:"date_to"`
 	Name           *string `json:"name"`
