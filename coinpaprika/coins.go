@@ -58,13 +58,16 @@ type CoinLink struct {
 
 // Tweet represents twitter timeline entry.
 type Tweet struct {
-	Date        *time.Time `json:"date"`
-	UserName    *string    `json:"user_name"`
-	Status      *string    `json:"status"`
-	IsRetweet   *bool      `json:"is_retweet"`
-	StatusLink  *string    `json:"status_link"`
-	MediaLink   *string    `json:"media_link,omitempty"`
-	YoutubeLink *string    `json:"youtube_link,omitempty"`
+	Date          *time.Time `json:"date"`
+	UserName      *string    `json:"user_name"`
+	UserImageLink *string    `json:"user_image_link"`
+	Status        *string    `json:"status"`
+	IsRetweet     *bool      `json:"is_retweet"`
+	RetweetCount  *int64     `json:"retweet_count"`
+	LikeCount     *int64     `json:"like_count"`
+	StatusLink    *string    `json:"status_link"`
+	MediaLink     *string    `json:"media_link,omitempty"`
+	YoutubeLink   *string    `json:"youtube_link,omitempty"`
 }
 
 // Event represents event on related to coin.
