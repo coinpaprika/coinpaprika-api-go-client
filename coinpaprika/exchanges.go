@@ -25,7 +25,10 @@ type Exchange struct {
 	ID                     *string                  `json:"id"`
 	Name                   *string                  `json:"name"`
 	Message                *string                  `json:"message"`
+	Description            *string                  `json:"description"`
 	Active                 *bool                    `json:"active"`
+	WebsiteStatus          *bool                    `json:"website_status"`
+	APIStatus              *bool                    `json:"api_status"`
 	MarketsDataFetched     *bool                    `json:"markets_data_fetched"`
 	Rank                   *int64                   `json:"rank"`
 	AdjustedRank           *int64                   `json:"adjusted_rank"`
