@@ -30,6 +30,7 @@ type Coin struct {
 	Rank     *int64  `json:"rank"`
 	IsNew    *bool   `json:"is_new"`
 	IsActive *bool   `json:"is_active"`
+	Type     *string `json:"type"`
 
 	// Extended information
 	Parent            *Parent             `json:"parent"`
