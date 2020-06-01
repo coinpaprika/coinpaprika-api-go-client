@@ -1,4 +1,4 @@
-module github.com/coinpaprika/coinpaprika-api-go-client/v2
+module github.com/coinpaprika/coinpaprika-api-go-client
 
 require (
 	github.com/davecgh/go-spew v1.1.1 // indirect
