@@ -30,7 +30,10 @@ type Quote struct {
 	Volume24hChange24h  *float64 `json:"volume_24h_change_24h"`
 	MarketCap           *float64 `json:"market_cap"`
 	MarketCapChange24h  *float64 `json:"market_cap_change_24h"`
+	PercentChange15m    *float64 `json:"percent_change_15m"`
+	PercentChange30m    *float64 `json:"percent_change_30m"`
 	PercentChange1h     *float64 `json:"percent_change_1h"`
+	PercentChange6h     *float64 `json:"percent_change_6h"`
 	PercentChange12h    *float64 `json:"percent_change_12h"`
 	PercentChange24h    *float64 `json:"percent_change_24h"`
 	PercentChange7d     *float64 `json:"percent_change_7d"`
