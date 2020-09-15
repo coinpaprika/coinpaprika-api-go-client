@@ -91,6 +91,9 @@ Check out the [`./examples`](./examples) directory.
 ### Search
 - [x] Search tool
 
+### Price Converter
+- [x] Price converter
+
 
 ## License
 
