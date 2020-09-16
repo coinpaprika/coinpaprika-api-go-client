@@ -17,14 +17,15 @@ const (
 
 // Client can be used to get data from coinpaprika API.
 type Client struct {
-	httpClient *http.Client
-	Tickers    TickersService
-	Search     SearchService
-	Coins      CoinsService
-	Global     GlobalService
-	Tags       TagsService
-	People     PeopleService
-	Exchanges  ExchangesService
+	httpClient     *http.Client
+	Tickers        TickersService
+	Search         SearchService
+	PriceConverter PriceConverterService
+	Coins          CoinsService
+	Global         GlobalService
+	Tags           TagsService
+	People         PeopleService
+	Exchanges      ExchangesService
 }
 
 type service struct {
@@ -43,6 +44,7 @@ func NewClient(httpClient *http.Client) *Client {
 
 	c.Tickers.httpClient = c.httpClient
 	c.Search.httpClient = c.httpClient
+	c.PriceConverter.httpClient = c.httpClient
 	c.Coins.httpClient = c.httpClient
 	c.Global.httpClient = c.httpClient
 	c.Tags.httpClient = c.httpClient
