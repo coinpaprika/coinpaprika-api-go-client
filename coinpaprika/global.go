@@ -35,5 +35,4 @@ func (s *GlobalService) Get() (g *GlobalStats, err error) {
 
 	err = json.Unmarshal(body, &g)
 	return g, err
-
 }

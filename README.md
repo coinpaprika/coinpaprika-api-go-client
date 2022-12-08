@@ -50,13 +50,19 @@ customClient := &http.Client{Timeout: 10 * time.Second}
 paprikaClient := coinpaprika.NewClient(customClient)
 ```
 
+## Setting API key for and enabling access to Coinpaprika Pro API
+Key can be obtained from [Coinpaprika API](https://coinpaprika.com/api/)
+
+```go
+paprikaClient := coinpaprika.NewClient(nil, coinpaprika.WithAPIKey("your_api_key_goes_here"))
+```
 
 ## Examples
 
 Check out the [`./examples`](./examples) directory.
 
 
-## Implementation status (API v1.4.3)
+## Implementation status
 
 ### Global
 - [x] Get market overview data
