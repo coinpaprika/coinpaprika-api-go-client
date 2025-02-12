@@ -19,6 +19,7 @@ type Ticker struct {
 	TotalSupply       *int64           `json:"total_supply"`
 	MaxSupply         *int64           `json:"max_supply"`
 	BetaValue         *float64         `json:"beta_value"`
+	FirstDataAt       *string          `json:"first_data_at"`
 	LastUpdated       *string          `json:"last_updated"`
 	Quotes            map[string]Quote `json:"quotes"`
 }
