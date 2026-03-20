@@ -16,7 +16,7 @@ tidy: ## Run go mod tidy
 
 check: ## Linting and static analysis
 	@if test ! -e ./bin/golangci-lint; then \
-		curl -sfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh| sh; \
+		curl -sfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh| sh -s -- -b ./bin v1.64.8; \
 	fi
 
 	@./bin/golangci-lint run -c .golangci.yml
