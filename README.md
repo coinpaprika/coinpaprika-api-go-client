@@ -1,7 +1,7 @@
 # Coinpaprika API Go Client
 
-[![Build Status](https://travis-ci.org/coinpaprika/coinpaprika-api-go-client.svg?branch=master)](https://travis-ci.org/coinpaprika/coinpaprika-api-go-client)
-[![go-doc](https://godoc.org/github.com/coinpaprika/coinpaprika-api-go-client?status.svg)](https://godoc.org/github.com/coinpaprika/coinpaprika-api-go-client/coinpaprika)
+[![Build Status](https://github.com/coinpaprika/coinpaprika-api-go-client/actions/workflows/main.yml/badge.svg)](https://github.com/coinpaprika/coinpaprika-api-go-client/actions)
+[![Go Reference](https://pkg.go.dev/badge/github.com/coinpaprika/coinpaprika-api-go-client/v2.svg)](https://pkg.go.dev/github.com/coinpaprika/coinpaprika-api-go-client/v2)
 [![Go Report Card](https://goreportcard.com/badge/github.com/coinpaprika/coinpaprika-api-go-client)](https://goreportcard.com/report/github.com/coinpaprika/coinpaprika-api-go-client)
 
 
@@ -70,12 +70,14 @@ Check out the [`./examples`](./examples) directory.
 ### Coins
 - [x] List coins
 - [x] Get coin by ID
-- [x] Get twitter timeline for coin
+- [x] ~~Get twitter timeline for coin~~ (deprecated)
 - [x] Get coin events by coin ID
 - [x] Get exchanges by coin ID
 - [x] Get markets by coin ID
 - [x] Get latest OHLCV
 - [x] Get historical OHLCV
+- [x] Get today OHLCV
+- [x] Get ID mappings (Business+)
 
 ### People
 - [x] Get people by ID
@@ -84,7 +86,7 @@ Check out the [`./examples`](./examples) directory.
 - [x] List tags
 - [x] Get tag by ID
 
-### Tickers 
+### Tickers
 - [x] Get tickers for all coins
 - [x] Get ticker information for specific coin
 - [x] Get historical tickers for specific coin
@@ -94,12 +96,32 @@ Check out the [`./examples`](./examples) directory.
 - [x] Get exchange by ID
 - [x] List markets by exchange ID
 
+### Contracts
+- [x] List contract platforms
+- [x] Get contracts by platform
+- [x] Get ticker by contract address
+- [x] Get historical ticks by contract address
+
 ### Search
 - [x] Search tool
 
 ### Price Converter
 - [x] Price converter
 
+### Key
+- [x] Get API key info (Pro+)
+
+### Changelog
+- [x] Get ID changelog (Starter+)
+
+
+## Other Coinpaprika Tools
+
+Looking for other ways to integrate crypto data? Check out these tools:
+
+- **[Coinpaprika CLI](https://github.com/coinpaprika/coinpaprika-cli)** — Free crypto market data from your terminal. 8,000+ coins, real-time prices, OHLCV, and exchange data.
+- **[Coinpaprika MCP Server](https://github.com/coinpaprika/coinpaprika-mcp)** — Plug crypto market data directly into AI assistants like Claude. 30+ tools, no API key required.
+- **[DexPaprika](https://dexpaprika.com)** — Free, real-time DEX data across 30+ networks and 200+ DEXes. If you need on-chain trading data, pools, or token prices — start here.
 
 ## License
 

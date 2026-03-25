@@ -135,6 +135,7 @@ func (s *CoinsService) GetByID(coinID string) (coin *Coin, err error) {
 }
 
 // GetTwitterTimelineByCoinID gets twitter timeline for a coin by coin id (eg. btc-bitcoin).
+// Deprecated: This endpoint is deprecated in the CoinPaprika API and may be removed in a future version.
 func (s *CoinsService) GetTwitterTimelineByCoinID(coinID string) (timeline []*Tweet, err error) {
 	url := fmt.Sprintf("%s/coins/%s/twitter", baseURL, coinID)
 
@@ -201,6 +202,62 @@ func (s *CoinsService) GetLatestOHLCVByCoinID(coinID string, options *LatestOHLC
 
 	err = json.Unmarshal(body, &entries)
 	return entries, err
+}
+
+// GetTodayOHLCVByCoinID gets today's ohlcv values for a coin by coin id (eg. btc-bitcoin).
+func (s *CoinsService) GetTodayOHLCVByCoinID(coinID string, options *LatestOHLCVOptions) (entries []*OHLCVEntry, err error) {
+	url := fmt.Sprintf("%s/coins/%s/ohlcv/today", baseURL, coinID)
+	url, err = constructURL(url, options)
+	if err != nil {
+		return nil, err
+	}
+
+	body, err := sendGET(s.httpClient, url)
+	if err != nil {
+		return nil, err
+	}
+
+	err = json.Unmarshal(body, &entries)
+	return entries, err
+}
+
+// MappingsOptions specifies optional parameters for coin mappings endpoint.
+type MappingsOptions struct {
+	Coinpaprika   string `url:"coinpaprika,omitempty"`
+	Coinmarketcap string `url:"coinmarketcap,omitempty"`
+	Coingecko     string `url:"coingecko,omitempty"`
+	Cryptocompare string `url:"cryptocompare,omitempty"`
+	ISIN          string `url:"isin,omitempty"`
+	DTI           string `url:"dti,omitempty"`
+}
+
+// CoinMapping represents a mapping between coinpaprika and other platform identifiers.
+type CoinMapping struct {
+	Coinpaprika   *string `json:"coinpaprika"`
+	Coinmarketcap *string `json:"coinmarketcap"`
+	Coingecko     *string `json:"coingecko"`
+	Cryptocompare *string `json:"cryptocompare"`
+	ISIN          *string `json:"isin"`
+	DTI           *string `json:"dti"`
+	UpdatedAt     *string `json:"updated_at"`
+}
+
+// GetMappings returns coin ID mapping between coinpaprika and other platforms.
+// At least one option must be provided (e.g. Coinpaprika, Coingecko, etc.).
+func (s *CoinsService) GetMappings(options *MappingsOptions) (mapping *CoinMapping, err error) {
+	url := fmt.Sprintf("%s/coins/mappings", baseURL)
+	url, err = constructURL(url, options)
+	if err != nil {
+		return nil, err
+	}
+
+	body, err := sendGET(s.httpClient, url)
+	if err != nil {
+		return nil, err
+	}
+
+	err = json.Unmarshal(body, &mapping)
+	return mapping, err
 }
 
 // GetHistoricalOHLCVByCoinID gets historical ohlcv values for a coin by coin id (eg. btc-bitcoin).
