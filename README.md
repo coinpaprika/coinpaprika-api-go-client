@@ -11,6 +11,12 @@ This library provides convenient way to use [coinpaprika.com API](https://api.co
 
 [Coinpaprika](https://coinpaprika.com) delivers full market data to the world of crypto: coin prices, volumes, market caps, ATHs, return rates and more.
 
+## Installation
+
+```sh
+go get github.com/coinpaprika/coinpaprika-api-go-client/v2
+```
+
 ## Getting started
 
 ```go
@@ -19,7 +25,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/coinpaprika/coinpaprika-api-go-client/coinpaprika"
+	"github.com/coinpaprika/coinpaprika-api-go-client/v2/coinpaprika"
 )
 
 func main() {
