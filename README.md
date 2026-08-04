@@ -125,9 +125,9 @@ Check out the [`./examples`](./examples) directory.
 
 Looking for other ways to integrate crypto data? Check out these tools:
 
-- **[Coinpaprika CLI](https://github.com/coinpaprika/coinpaprika-cli)** — Free crypto market data from your terminal. 8,000+ coins, real-time prices, OHLCV, and exchange data.
-- **[Coinpaprika MCP Server](https://github.com/coinpaprika/coinpaprika-mcp)** — Plug crypto market data directly into AI assistants like Claude. 30+ tools, no API key required.
-- **[DexPaprika](https://dexpaprika.com)** — Free, real-time DEX data across 30+ networks and 200+ DEXes. If you need on-chain trading data, pools, or token prices — start here.
+- **[Coinpaprika CLI](https://github.com/coinpaprika/coinpaprika-cli)**: crypto market data from your terminal. 12,000+ cryptocurrencies, 350+ exchanges, prices, OHLCV. Free tier included.
+- **[Coinpaprika MCP Server](https://github.com/coinpaprika/coinpaprika-mcp)**: plug crypto market data directly into AI assistants like Claude. 30+ tools, no API key needed to get started.
+- **[DexPaprika](https://dexpaprika.com)**: DEX data across 36 chains and 230+ DEXes, over 96% of on-chain DEX volume. If you need on-chain trading data, pools, or token prices, start here.
 
 ## License
 
