@@ -128,6 +128,10 @@ func (suite *ClientTestSuite) TestEncodePathSegmentRejectsUnsafeIDs() {
 		"%2e%2e",
 		"%2f",
 		"a%b",
+		"\uFF0E\uFF0E",
+		"a\u2215b",
+		"a\uFF0Fb",
+		"\u2024\u2024",
 	}
 	for _, id := range badIDs {
 		_, err := encodePathSegment(id)

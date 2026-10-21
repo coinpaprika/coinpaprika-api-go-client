@@ -130,7 +130,9 @@ func WithAPIKey(apiKey string) ClientOptions {
 // single, safe path segment. It rejects ids that could change which endpoint,
 // path or query the request actually hits: empty ids, ids that are (or, after
 // one percent-decode, decode to) "." or "..", and ids containing "/", "\",
-// "?", "#", "%", whitespace, or control characters. The check runs on the raw
+// "?", "#", "%", whitespace, control characters, or anything outside ASCII
+// (so Unicode look-alikes of "." and "/" cannot stand in for them; every
+// CoinPaprika id is ASCII). The check runs on the raw
 // id, not only the encoded form, because url.PathEscape alone leaves "." and
 // ".." untouched.
 func encodePathSegment(id string) (string, error) {
@@ -155,6 +157,8 @@ func encodePathSegment(id string) (string, error) {
 			return "", fmt.Errorf("id must not contain %q", string(r))
 		case unicode.IsSpace(r) || unicode.IsControl(r):
 			return "", fmt.Errorf("id must not contain whitespace or control characters")
+		case r > unicode.MaxASCII:
+			return "", fmt.Errorf("id must not contain non-ASCII characters")
 		}
 	}
 
