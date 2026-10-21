@@ -44,7 +44,11 @@ func (s *TagsService) List(options *TagsOptions) (tags []*Tag, err error) {
 
 // GetByID return a tag by id.
 func (s *TagsService) GetByID(tagID string, options *TagsOptions) (tag *Tag, err error) {
-	url := fmt.Sprintf("%s/tags/%s", baseURL, tagID)
+	encodedTagID, err := encodePathSegment(tagID)
+	if err != nil {
+		return nil, err
+	}
+	url := fmt.Sprintf("%s/tags/%s", baseURL, encodedTagID)
 	url, err = constructURL(url, options)
 	if err != nil {
 		return nil, err

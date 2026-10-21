@@ -96,7 +96,11 @@ func (s *ExchangesService) List(options *ExchangesOptions) (exchanges []*Exchang
 
 // GetByID gets exchange by ID.
 func (s *ExchangesService) GetByID(exchangeID string, options *ExchangesOptions) (exchange *Exchange, err error) {
-	url := fmt.Sprintf("%s/exchanges/%s", baseURL, exchangeID)
+	encodedExchangeID, err := encodePathSegment(exchangeID)
+	if err != nil {
+		return nil, err
+	}
+	url := fmt.Sprintf("%s/exchanges/%s", baseURL, encodedExchangeID)
 	url, err = constructURL(url, options)
 	if err != nil {
 		return nil, err
@@ -113,7 +117,11 @@ func (s *ExchangesService) GetByID(exchangeID string, options *ExchangesOptions)
 
 // GetMarketsByExchangeID gets list of markets for an exchange.
 func (s *ExchangesService) GetMarketsByExchangeID(exchangeID string, options *MarketsOptions) (markets []*Market, err error) {
-	url := fmt.Sprintf("%s/exchanges/%s/markets", baseURL, exchangeID)
+	encodedExchangeID, err := encodePathSegment(exchangeID)
+	if err != nil {
+		return nil, err
+	}
+	url := fmt.Sprintf("%s/exchanges/%s/markets", baseURL, encodedExchangeID)
 	url, err = constructURL(url, options)
 	if err != nil {
 		return nil, err

@@ -6,6 +6,8 @@ import (
 	"net/http"
 	"net/url"
 	"reflect"
+	"strings"
+	"unicode"
 
 	"github.com/google/go-querystring/query"
 )
@@ -46,11 +48,18 @@ type (
 	authTransport struct {
 		baseTransport http.RoundTripper
 		apiKey        string
+		host          string
 	}
 )
 
+// RoundTrip adds the Authorization header only to https requests aimed at the
+// configured API host, so the key is never sent to any other host this process
+// talks to, and never survives a redirect to a different host or to plain http.
 func (t *authTransport) RoundTrip(req *http.Request) (*http.Response, error) {
-	req.Header.Add("Authorization", t.apiKey)
+	if req.URL.Scheme == "https" && req.URL.Host == t.host {
+		req = req.Clone(req.Context())
+		req.Header.Set("Authorization", t.apiKey)
+	}
 	return t.baseTransport.RoundTrip(req)
 }
 
@@ -91,16 +100,75 @@ func WithAPIKey(apiKey string) ClientOptions {
 	return func(a *Client) {
 		baseURL = baseProURL
 
+		proHost := baseProURL
+		if parsed, err := url.Parse(baseProURL); err == nil {
+			proHost = parsed.Host
+		}
+
 		baseTransport := http.DefaultTransport
-		if a.httpClient.Transport != nil {
+		if a.httpClient != nil && a.httpClient.Transport != nil {
 			baseTransport = a.httpClient.Transport
 		}
 
-		a.httpClient.Transport = &authTransport{
+		// Never mutate a client the SDK does not own: copy the caller's
+		// client (or http.DefaultClient, if none was given) instead of
+		// replacing its Transport in place.
+		copied := http.Client{}
+		if a.httpClient != nil {
+			copied = *a.httpClient
+		}
+		copied.Transport = &authTransport{
 			apiKey:        apiKey,
 			baseTransport: baseTransport,
+			host:          proHost,
+		}
+		a.httpClient = &copied
+	}
+}
+
+// encodePathSegment validates a caller-supplied id and returns it encoded as a
+// single, safe path segment. It rejects ids that could change which endpoint,
+// path or query the request actually hits: empty ids, ids that are (or, after
+// one percent-decode, decode to) "." or "..", and ids containing "/", "\",
+// "?", "#", "%", whitespace, control characters, or anything outside ASCII
+// (so Unicode look-alikes of "." and "/" cannot stand in for them; every
+// CoinPaprika id is ASCII). The check runs on the raw
+// id, not only the encoded form, because url.PathEscape alone leaves "." and
+// ".." untouched.
+func encodePathSegment(id string) (string, error) {
+	if id == "" {
+		return "", fmt.Errorf("id must not be empty")
+	}
+	if id == "." || id == ".." {
+		return "", fmt.Errorf("id must not be %q", id)
+	}
+
+	decoded, decodeErr := url.QueryUnescape(id)
+	if decodeErr != nil {
+		decoded = id
+	}
+	if decoded == "." || decoded == ".." {
+		return "", fmt.Errorf("id must not decode to %q", decoded)
+	}
+
+	for _, r := range decoded {
+		switch {
+		case r == '/' || r == '\\' || r == '?' || r == '#' || r == '%':
+			return "", fmt.Errorf("id must not contain %q", string(r))
+		case unicode.IsSpace(r) || unicode.IsControl(r):
+			return "", fmt.Errorf("id must not contain whitespace or control characters")
+		case r > unicode.MaxASCII:
+			return "", fmt.Errorf("id must not contain non-ASCII characters")
 		}
 	}
+
+	escaped := url.PathEscape(id)
+	if strings.ContainsAny(escaped, "/\\") {
+		// Defensive: escaped must still be a single path segment.
+		return "", fmt.Errorf("id did not encode to a single path segment")
+	}
+
+	return escaped, nil
 }
 
 func constructURL(rawURL string, options interface{}) (string, error) {

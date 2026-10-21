@@ -31,7 +31,11 @@ func (s *ContractsService) ListPlatforms() (platforms []string, err error) {
 
 // GetByPlatform returns list of contracts for a given platform.
 func (s *ContractsService) GetByPlatform(platformID string) (contracts []*Contract, err error) {
-	url := fmt.Sprintf("%s/contracts/%s", baseURL, platformID)
+	encodedPlatformID, err := encodePathSegment(platformID)
+	if err != nil {
+		return nil, err
+	}
+	url := fmt.Sprintf("%s/contracts/%s", baseURL, encodedPlatformID)
 
 	body, err := sendGET(s.httpClient, url)
 	if err != nil {
@@ -44,7 +48,15 @@ func (s *ContractsService) GetByPlatform(platformID string) (contracts []*Contra
 
 // GetTickerByContractAddress returns ticker data for a contract address on a given platform.
 func (s *ContractsService) GetTickerByContractAddress(platformID, contractAddress string, options *TickersOptions) (ticker *Ticker, err error) {
-	url := fmt.Sprintf("%s/contracts/%s/%s", baseURL, platformID, contractAddress)
+	encodedPlatformID, err := encodePathSegment(platformID)
+	if err != nil {
+		return nil, err
+	}
+	encodedContractAddress, err := encodePathSegment(contractAddress)
+	if err != nil {
+		return nil, err
+	}
+	url := fmt.Sprintf("%s/contracts/%s/%s", baseURL, encodedPlatformID, encodedContractAddress)
 	url, err = constructURL(url, options)
 	if err != nil {
 		return nil, err
@@ -61,7 +73,15 @@ func (s *ContractsService) GetTickerByContractAddress(platformID, contractAddres
 
 // GetHistoricalTickerByContractAddress returns historical ticker data for a contract address on a given platform.
 func (s *ContractsService) GetHistoricalTickerByContractAddress(platformID, contractAddress string, options *TickersHistoricalOptions) (tickersHistorical []*TickerHistorical, err error) {
-	url := fmt.Sprintf("%s/contracts/%s/%s/historical", baseURL, platformID, contractAddress)
+	encodedPlatformID, err := encodePathSegment(platformID)
+	if err != nil {
+		return nil, err
+	}
+	encodedContractAddress, err := encodePathSegment(contractAddress)
+	if err != nil {
+		return nil, err
+	}
+	url := fmt.Sprintf("%s/contracts/%s/%s/historical", baseURL, encodedPlatformID, encodedContractAddress)
 	url, err = constructURL(url, options)
 	if err != nil {
 		return nil, err

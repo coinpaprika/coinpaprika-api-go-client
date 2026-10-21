@@ -123,7 +123,11 @@ func (s *CoinsService) List() (coins []*Coin, err error) {
 
 // GetByID gets coin by id (eg. btc-bitcoin).
 func (s *CoinsService) GetByID(coinID string) (coin *Coin, err error) {
-	url := fmt.Sprintf("%s/coins/%s", baseURL, coinID)
+	encodedCoinID, err := encodePathSegment(coinID)
+	if err != nil {
+		return nil, err
+	}
+	url := fmt.Sprintf("%s/coins/%s", baseURL, encodedCoinID)
 
 	body, err := sendGET(s.httpClient, url)
 	if err != nil {
@@ -137,7 +141,11 @@ func (s *CoinsService) GetByID(coinID string) (coin *Coin, err error) {
 // GetTwitterTimelineByCoinID gets twitter timeline for a coin by coin id (eg. btc-bitcoin).
 // Deprecated: This endpoint is deprecated in the CoinPaprika API and may be removed in a future version.
 func (s *CoinsService) GetTwitterTimelineByCoinID(coinID string) (timeline []*Tweet, err error) {
-	url := fmt.Sprintf("%s/coins/%s/twitter", baseURL, coinID)
+	encodedCoinID, err := encodePathSegment(coinID)
+	if err != nil {
+		return nil, err
+	}
+	url := fmt.Sprintf("%s/coins/%s/twitter", baseURL, encodedCoinID)
 
 	body, err := sendGET(s.httpClient, url)
 	if err != nil {
@@ -150,7 +158,11 @@ func (s *CoinsService) GetTwitterTimelineByCoinID(coinID string) (timeline []*Tw
 
 // GetEventsByCoinID gets events for a coin by coin id (eg. btc-bitcoin).
 func (s *CoinsService) GetEventsByCoinID(coinID string) (events []*Event, err error) {
-	url := fmt.Sprintf("%s/coins/%s/events", baseURL, coinID)
+	encodedCoinID, err := encodePathSegment(coinID)
+	if err != nil {
+		return nil, err
+	}
+	url := fmt.Sprintf("%s/coins/%s/events", baseURL, encodedCoinID)
 
 	body, err := sendGET(s.httpClient, url)
 	if err != nil {
@@ -163,7 +175,11 @@ func (s *CoinsService) GetEventsByCoinID(coinID string) (events []*Event, err er
 
 // GetExchangesByCoinID gets exchanges for a coin by coin id.
 func (s *CoinsService) GetExchangesByCoinID(coinID string) (exchanges []*Exchange, err error) {
-	url := fmt.Sprintf("%s/coins/%s/exchanges", baseURL, coinID)
+	encodedCoinID, err := encodePathSegment(coinID)
+	if err != nil {
+		return nil, err
+	}
+	url := fmt.Sprintf("%s/coins/%s/exchanges", baseURL, encodedCoinID)
 
 	body, err := sendGET(s.httpClient, url)
 	if err != nil {
@@ -176,7 +192,11 @@ func (s *CoinsService) GetExchangesByCoinID(coinID string) (exchanges []*Exchang
 
 // GetMarketsByCoinID gets markets for a coin by coin id.
 func (s *CoinsService) GetMarketsByCoinID(coinID string) (markets []*Market, err error) {
-	url := fmt.Sprintf("%s/coins/%s/markets", baseURL, coinID)
+	encodedCoinID, err := encodePathSegment(coinID)
+	if err != nil {
+		return nil, err
+	}
+	url := fmt.Sprintf("%s/coins/%s/markets", baseURL, encodedCoinID)
 
 	body, err := sendGET(s.httpClient, url)
 	if err != nil {
@@ -189,7 +209,11 @@ func (s *CoinsService) GetMarketsByCoinID(coinID string) (markets []*Market, err
 
 // GetLatestOHLCVByCoinID gets latest ohlcv values for a coin by coin id (eg. btc-bitcoin).
 func (s *CoinsService) GetLatestOHLCVByCoinID(coinID string, options *LatestOHLCVOptions) (entries []*OHLCVEntry, err error) {
-	url := fmt.Sprintf("%s/coins/%s/ohlcv/latest", baseURL, coinID)
+	encodedCoinID, err := encodePathSegment(coinID)
+	if err != nil {
+		return nil, err
+	}
+	url := fmt.Sprintf("%s/coins/%s/ohlcv/latest", baseURL, encodedCoinID)
 	url, err = constructURL(url, options)
 	if err != nil {
 		return nil, err
@@ -206,7 +230,11 @@ func (s *CoinsService) GetLatestOHLCVByCoinID(coinID string, options *LatestOHLC
 
 // GetTodayOHLCVByCoinID gets today's ohlcv values for a coin by coin id (eg. btc-bitcoin).
 func (s *CoinsService) GetTodayOHLCVByCoinID(coinID string, options *LatestOHLCVOptions) (entries []*OHLCVEntry, err error) {
-	url := fmt.Sprintf("%s/coins/%s/ohlcv/today", baseURL, coinID)
+	encodedCoinID, err := encodePathSegment(coinID)
+	if err != nil {
+		return nil, err
+	}
+	url := fmt.Sprintf("%s/coins/%s/ohlcv/today", baseURL, encodedCoinID)
 	url, err = constructURL(url, options)
 	if err != nil {
 		return nil, err
@@ -262,7 +290,11 @@ func (s *CoinsService) GetMappings(options *MappingsOptions) (mapping *CoinMappi
 
 // GetHistoricalOHLCVByCoinID gets historical ohlcv values for a coin by coin id (eg. btc-bitcoin).
 func (s *CoinsService) GetHistoricalOHLCVByCoinID(coinID string, options *HistoricalOHLCVOptions) (entries []*OHLCVEntry, err error) {
-	url := fmt.Sprintf("%s/coins/%s/ohlcv/historical", baseURL, coinID)
+	encodedCoinID, err := encodePathSegment(coinID)
+	if err != nil {
+		return nil, err
+	}
+	url := fmt.Sprintf("%s/coins/%s/ohlcv/historical", baseURL, encodedCoinID)
 	url, err = constructURL(url, options)
 	if err != nil {
 		return nil, err
