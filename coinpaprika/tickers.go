@@ -86,7 +86,11 @@ func (s *TickersService) List(options *TickersOptions) (tickers []*Ticker, err e
 
 // GetByID gets ticker information for specific coin by id (eg. btc-bitcoin).
 func (s *TickersService) GetByID(coinID string, options *TickersOptions) (ticker *Ticker, err error) {
-	url := fmt.Sprintf("%s/tickers/%s", baseURL, coinID)
+	encodedCoinID, err := encodePathSegment(coinID)
+	if err != nil {
+		return nil, err
+	}
+	url := fmt.Sprintf("%s/tickers/%s", baseURL, encodedCoinID)
 	url, err = constructURL(url, options)
 	if err != nil {
 		return nil, err
@@ -103,7 +107,11 @@ func (s *TickersService) GetByID(coinID string, options *TickersOptions) (ticker
 
 // GetHistoricalTickersByID gets historical ticker information for specific coin by id (eg. btc-bitcoin).
 func (s *TickersService) GetHistoricalTickersByID(coinID string, options *TickersHistoricalOptions) (tickersHistorical []*TickerHistorical, err error) {
-	url := fmt.Sprintf("%s/tickers/%s/historical", baseURL, coinID)
+	encodedCoinID, err := encodePathSegment(coinID)
+	if err != nil {
+		return nil, err
+	}
+	url := fmt.Sprintf("%s/tickers/%s/historical", baseURL, encodedCoinID)
 	url, err = constructURL(url, options)
 	if err != nil {
 		return nil, err

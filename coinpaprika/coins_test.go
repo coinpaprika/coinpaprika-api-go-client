@@ -1,6 +1,7 @@
 package coinpaprika
 
 import (
+	"net/http"
 	"testing"
 	"time"
 
@@ -102,6 +103,33 @@ func (suite *CoinsTestSuite) TestGetHistoricalOHLCVByCoinID() {
 	}
 	suite.NotEmpty(entries)
 	suite.Len(entries, 11)
+}
+
+// TestGetByIDRejectsPathEscapingIDs proves a coinID that could retarget the
+// endpoint or inject a query ("a/b", "..", "btc?x=1", "btc#f") is rejected
+// before any request is built, using a stub transport so nothing is sent.
+func (suite *CoinsTestSuite) TestGetByIDRejectsPathEscapingIDs() {
+	rt := &recordingRoundTripper{}
+	client := NewClient(&http.Client{Transport: rt})
+
+	badIDs := []string{"a/b", "..", "../key/info", "btc?x=1", "btc#f"}
+	for _, id := range badIDs {
+		_, err := client.Coins.GetByID(id)
+		suite.Error(err, "id %q should be rejected before a request is built", id)
+	}
+	suite.Empty(rt.requests, "no request should reach the transport for a rejected id")
+}
+
+// TestGetByIDEncodesSafeID proves a normal coinID still produces exactly one
+// encoded path segment under /coins, unchanged from before this fix.
+func (suite *CoinsTestSuite) TestGetByIDEncodesSafeID() {
+	rt := &recordingRoundTripper{}
+	client := NewClient(&http.Client{Transport: rt})
+
+	_, _ = client.Coins.GetByID("btc-bitcoin")
+	suite.Require().Len(rt.requests, 1)
+	suite.Equal("/v1/coins/btc-bitcoin", rt.requests[0].URL.Path)
+	suite.Empty(rt.requests[0].URL.RawQuery)
 }
 
 func TestCoinsTestSuite(t *testing.T) {

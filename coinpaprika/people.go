@@ -34,7 +34,11 @@ type Person struct {
 
 // GetByID gets person by person id (eg. vitalik-buterin).
 func (s *PeopleService) GetByID(personID string) (person *Person, err error) {
-	url := fmt.Sprintf("%s/people/%s", baseURL, personID)
+	encodedPersonID, err := encodePathSegment(personID)
+	if err != nil {
+		return nil, err
+	}
+	url := fmt.Sprintf("%s/people/%s", baseURL, encodedPersonID)
 
 	body, err := sendGET(s.httpClient, url)
 	if err != nil {
